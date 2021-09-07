@@ -1,0 +1,19 @@
+#Database
+/db.sqlite3
+
+#Environment files
+/.env
+
+#Virtual Environment
+/venv/
+
+# JetBrains files
+/.idea/
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+/static/
+/media/
