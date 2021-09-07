@@ -1,19 +1,19 @@
 #Database
-/db.sqlite3
+WebSearchableEquipmentDatabase/db.sqlite3
 
 #Environment files
-/.env
+.env
 
 #Virtual Environment
-/venv/
+venv/
 
 # JetBrains files
-/.idea/
+.idea/
 
 ### Django ###
-*.log
-*.pot
-*.pyc
-__pycache__/
-/static/
-/media/
+WebSearchableEquipmentDatabase/*.log
+WebSearchableEquipmentDatabase/*.pot
+WebSearchableEquipmentDatabase/*.pyc
+WebSearchableEquipmentDatabase/__pycache__/
+WebSearchableEquipmentDatabase/static/
+WebSearchableEquipmentDatabase/media/
