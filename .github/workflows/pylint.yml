@@ -20,4 +20,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         cd WebSearchableEquipmentDatabase
-        pylint `ls -R|grep .py$|xargs`
+        pylint --fail-under=9 `ls -R|grep .py$|xargs`
