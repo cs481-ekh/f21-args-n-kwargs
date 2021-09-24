@@ -1,5 +1,5 @@
 #!/bin/bash
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-cd WebSearchableEquipmentDatabase || exit 1
-python manage.py test
+python -m pip install --upgrade pip || exit $?
+pip install -r requirements.txt || exit $?
+cd WebSearchableEquipmentDatabase || exit $?
+python manage.py test || exit $?
