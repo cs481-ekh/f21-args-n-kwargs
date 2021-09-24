@@ -7,3 +7,7 @@ def login(request):
 
 def logout(request):
     return render(request, 'accounts/logout.html')
+
+
+def home(request):
+    return render(request, 'accounts/dashboard.html')
