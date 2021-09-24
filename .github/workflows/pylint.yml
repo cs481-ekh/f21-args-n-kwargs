@@ -13,11 +13,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analysing the code with pylint
-      run: |
-        cd WebSearchableEquipmentDatabase
-        pylint --fail-under=9 `ls -R|grep .py$|xargs`
+    - name: Make executable
+      run: chmod +x ./build.sh
+    - name: Install dependencies and Analysing the code with pylint
+      run: ./build.sh
