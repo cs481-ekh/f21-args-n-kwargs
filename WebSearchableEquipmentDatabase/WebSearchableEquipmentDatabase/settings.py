@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # added applications
     'django.contrib.admindocs',
-    'accounts',
+    'accounts'
+    #'equipment', #For some reason, my pycharm is saying that this application label isn't unique
 ]
 
 MIDDLEWARE = [
@@ -57,7 +59,10 @@ ROOT_URLCONF = 'WebSearchableEquipmentDatabase.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'equipment', 'templates'),
+         ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
