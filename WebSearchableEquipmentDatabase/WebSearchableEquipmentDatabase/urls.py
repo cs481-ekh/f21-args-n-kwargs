@@ -19,7 +19,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls'))
+    path('', include('accounts.urls')),
     # path('login/', auth_views.login, name='login'),
     # path('logout/', auth_views.logout, name='logout'),
+    path('equipment/', include('equipment.urls')) #This will put every link in the equipment.urls.py file under equipment/{methodName}
+
 ]
