@@ -5,8 +5,10 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
-
+    path('activate/<uidb64>/<token>',
+         views.user_verification, name='activate'),
 
     #Password Reset Paths as_view() take a template as an argument to customized view
     path('reset_password/', auth_views.PasswordResetView.as_view(), name="reset_password"),
