@@ -10,10 +10,26 @@ from .models import Account
 
 from .utils import account_activation_token
 from accounts.forms import AccountCreationForm
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as django_login
 
 
 def login(request):
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            django_login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, "Invalid username or password.")
+
     return render(request, 'accounts/login.html')
+
+
+def forgot(request):
+    return render(request, 'accounts/forgot.html')
 
 
 def register(request):
