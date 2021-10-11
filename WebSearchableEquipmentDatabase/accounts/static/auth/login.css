@@ -27,6 +27,7 @@ html, body {
     color: darkred;
     border: 2px solid red;
     border-radius: 5px;
+    text-align: center;
 }
 
 .forgot-password {

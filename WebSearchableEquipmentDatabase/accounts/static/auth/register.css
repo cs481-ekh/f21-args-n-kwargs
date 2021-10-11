@@ -22,11 +22,14 @@ html, body {
     text-align: center;
 }
 
-.error-message {
+.errorlist {
     background-color: #ff7f7f;
     color: darkred;
     border: 2px solid red;
     border-radius: 5px;
+    list-style-type: none;
+    text-align: center;
+    padding: 8px 0 8px 0;
 }
 
 .button-container {
