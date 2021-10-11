@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('base/', views.index)
+    path('base/', views.index),
+    path('dataTable/', views.dataTable)
 
 
 ]
