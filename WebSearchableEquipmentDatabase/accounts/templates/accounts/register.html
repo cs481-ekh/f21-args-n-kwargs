@@ -9,26 +9,25 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="{% static "auth/login.css" %}">
+    <link rel="stylesheet" href="{% static "auth/register.css" %}">
 
     <title>Register</title>
 </head>
 <body>
-<h1>Hello from register.html</h1>
-<form method="POST" action="">
-    {% csrf_token %}
-    {% if messages %}
-<div class="messages">
-    {% for message in messages %}
-    <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>
-        {{ message }}
+<div class="container">
+    <div class="register-container">
+        <h2 class="register-text py-3">Register</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <div class="button-container">
+                <button class="btn btn-primary register-button" type="submit">Register</button>
+            </div>
+        </form>
+        <a href="{% url 'login' %}" class="existing-account">Already have an account? Log in.</a>
     </div>
-    {% endfor %}
 </div>
-{% endif %}
-{{ form.as_p }}
-<input type="submit" value="Login">
-{{form.errors}}
-</form>
 </body>
 </html>
