@@ -21,14 +21,6 @@ class TestViews(SimpleTestCase):
 
 
 class AccountFormTest(TestCase):
-    def test_account_form_email_field_label(self):
-        form = AccountCreationForm()
-        self.assertTrue(form.fields['email'].label == 'Email')
-
-    def test_account_form_password1_field_label(self):
-        form = AccountCreationForm()
-        self.assertTrue(form.fields['password1'].label == 'Password')
-
     def test_account_form_valid_email(self):
         email = "django@dev.com"
         password = "djangoIsAwesome"
