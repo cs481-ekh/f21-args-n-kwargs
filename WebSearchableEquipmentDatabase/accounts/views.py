@@ -33,12 +33,16 @@ def forgot(request):
 
 
 def register(request):
+    if request.method == 'POST':
+        if request.POST['password'] != request.POST['confirm-password']:
+            messages.error(request, "Passwords do not match.")
+            return redirect('register')
     form = AccountCreationForm()
     if request.method == 'POST':
         form = AccountCreationForm(request.POST)
         if form.is_valid():
             user = Account.objects.create(email=request.POST['email'])
-            user.set_password(request.POST['password1'])
+            user.set_password(request.POST['password'])
             user.is_active = False
             user.save()
             email = form.cleaned_data.get('email')
