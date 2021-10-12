@@ -20,11 +20,9 @@ from accounts import views as auth_views
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls'), name='home'),
-    path('login/', auth_views.login, name='login'),
-    path('logout/', auth_views.logout, name='logout'),
-    path('forgot/', auth_views.forgot, name='forgot'),
-    path('register/', auth_views.register, name='register'),
+    path('', include('accounts.urls')),
     # This will put every link in the equipment.urls.py file under equipment/{methodName}
     path('equipment/', include('equipment.urls'))
+
+
 ]

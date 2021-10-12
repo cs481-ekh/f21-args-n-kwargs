@@ -28,10 +28,6 @@ def login(request):
     return render(request, 'accounts/login.html')
 
 
-def forgot(request):
-    return render(request, 'accounts/forgot.html')
-
-
 def register(request):
     form = AccountCreationForm()
     if request.method == 'POST':
