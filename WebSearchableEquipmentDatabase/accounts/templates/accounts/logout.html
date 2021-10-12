@@ -14,6 +14,20 @@
     <title>Logout</title>
 </head>
 <body>
-    <h1>Hello from logout.html</h1>
+    <p>You have been logged out. You will be redirected in <span id="countdown">3</span> seconds. If you are not redirected <a href="/equipment/dataTable">click Here.</a></p>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        let timeLeft = 3;
+        const countdownFunction = async () => setTimeout(function(){
+            document.querySelector('#countdown').innerHTML = --timeLeft;
+            if(timeLeft == 0){
+                window.location.href="/equipment/dataTable";
+            }
+            else
+                countdownFunction();
+        }, 1000);
+        countdownFunction();
+    });
+</script>
 </html>

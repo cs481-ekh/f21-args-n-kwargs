@@ -58,7 +58,7 @@ def register(request):
             )
             email.send(fail_silently=False)
             messages.success(request, 'Account was created for ' + str(email))
-            return redirect('register')
+            return redirect('home')
 
     content = {'form': form}
     return render(request, 'accounts/register.html', content)

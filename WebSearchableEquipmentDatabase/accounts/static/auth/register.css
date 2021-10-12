@@ -9,7 +9,7 @@ html, body {
     align-items: center;
 }
 
-.login-container {
+.register-container {
     background-color: white;
     padding: 20px;
     align-content: center;
@@ -18,44 +18,39 @@ html, body {
     border-radius: 5px;
 }
 
-.login-text {
+.register-text {
     text-align: center;
 }
 
-.error-message {
+.errorlist {
     background-color: #ff7f7f;
     color: darkred;
     border: 2px solid red;
     border-radius: 5px;
+    list-style-type: none;
     text-align: center;
+    padding: 8px 0 8px 0;
 }
 
-.forgot-password {
+.button-container {
+    display: flex;
+}
+
+.register-button {
+    flex: 1;
+}
+
+.existing-account {
     color: gray;
     text-decoration: none;
     font-size: 12px;
     font-weight: 500;
 }
 
-.forgot-password:link, .forgot-password:visited, .forgot-password:hover, .forgot-password:active {
+.existing-account:link, .existing-account:visited, .existing-account:hover, .existing-account:active {
     color: gray
 }
 
-.forgot-password:hover {
+.existing-account:hover {
     cursor: pointer;
-}
-
-.button-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.login-button {
-    flex: 1;
-    margin-right: 6px;
-}
-
-.register-button {
-    flex: 1;
-    margin-left: 6px;
 }
