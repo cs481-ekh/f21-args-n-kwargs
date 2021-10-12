@@ -1,0 +1,91 @@
+{% extends 'equipment/base.html' %}
+{% load static %}
+{% block cssLinks %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static "dataTable/dataTable.css" %}">
+{% endblock %}
+
+{% block jsLinks %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>$.fn.selectpicker.Constructor.BootstrapVersion = "4.6.0"</script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin: 5px; max-width: 90%;">
+        <div class="row">
+            <div id="filterContainer" class="col col-4">
+                <label>Locations</label>
+                <select id="locationPicker" data-live-search="true" multiple selected="-1">
+                    <option value="-1" disabled hidden>Select a location</option>
+                    <option>These options</option>
+                    <option>Will have to be</option>
+                    <option>Populated</option>
+                    <option>With Real Data</option>
+                </select>
+                <br><hr>
+                <label>Select some categories</label>
+                <ul class="filterList">
+
+                    {# TODO, make this work with real data #}
+                    <li><input type="checkbox" name="name1"> Category1</li>
+                    <li><input type="checkbox" name="name2"> Category2</li>
+                    <li><input type="checkbox" name="name3"> Category3</li>
+                    <li><input type="checkbox" name="name4"> Misc</li>
+                </ul>
+                <br><hr>
+                <label>Another Filter Option</label>
+
+            </div>
+            <div id="dataTableContainer" class="col col-8">
+                <table id="dataTable" class="hover cell-border order-column"> {# https://datatables.net/manual/styling/classes #}
+                    <thead>
+                        <tr>
+                            <!-- This will have to be populated at some point with real data, but for now this is just demo data-->
+                            <th>Equipment Name</th>
+                            <th>Description</th>
+                            <th>Location</th>
+                            <th>Owner of Equipment</th>
+                            <th>Categories</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {# TODO {% foreach %}..... do stuff #}
+                        <tr>
+                            <td>Crucible</td>
+                            <td>Used to heat up materials, can hold 5cm<sup>3</sup> of volume</td>
+                            <td>Boise State University</td>
+                            <td>Ian Whitney</td>
+                            <td>High Heat, Thermal Measuring</td>
+                        </tr>
+                        <tr>
+                            <td>Graduated Cylinder</td>
+                            <td>Able to hold 10L of liquid substance and measure it accurately to 3 decimal places</td>
+                            <td>Some place in Pocatello</td>
+                            <td>Nick Stolarow</td>
+                            <td>Physical Properties, High Capacty</td>
+                        </tr>
+                        <tr>
+                            <td>Really big stick</td>
+                            <td>For poking the interns</td>
+                            <td>Micron</td>
+                            <td>Michael Cleverdon</td>
+                            <td>Misc</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block inlineJS %}
+    <script>
+        $(function(){
+           $('#dataTable').DataTable();
+           $('#locationPicker').selectpicker();
+        });
+    </script>
+{% endblock %}
