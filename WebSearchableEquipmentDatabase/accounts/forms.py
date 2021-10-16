@@ -1,9 +1,14 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UsernameField
 from .models import Account
 from django import forms
 
 
 class AccountCreationForm(UserCreationForm):
+    email = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email address'})
+    )
+
     password1 = forms.CharField(
         label="", widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}),
     )
@@ -17,8 +22,4 @@ class AccountCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
         model = Account
-        widgets = {
-            'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email address'}),
-        }
-
         fields = ('email', 'password1', 'password2')
