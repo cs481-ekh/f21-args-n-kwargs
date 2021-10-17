@@ -12,6 +12,7 @@ from .utils import account_activation_token
 from accounts.forms import AccountCreationForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
+from django.contrib.auth import logout as django_logout
 
 
 def login(request):
@@ -89,6 +90,7 @@ def user_verification(request, uidb64, token):
 
 
 def logout(request):
+    django_logout(request)
     return render(request, 'accounts/logout.html')
 
 

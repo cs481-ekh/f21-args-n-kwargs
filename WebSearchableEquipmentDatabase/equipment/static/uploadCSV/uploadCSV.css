@@ -1,0 +1,43 @@
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-container {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    width: 70%;
+    padding: 20px;
+}
+
+.upload-text {
+    text-align: center;
+}
+
+.custom-file-input {
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+}
+
+.upload-button {
+    flex: 1;
+}
+
+.input-hint {
+    color: gray;
+}
+
+.error-message {
+    background-color: #ff7f7f;
+    color: darkred;
+    border: 2px solid red;
+    border-radius: 5px;
+    list-style-type: none;
+    text-align: center;
+    padding: 8px 0 8px 0;
+}
