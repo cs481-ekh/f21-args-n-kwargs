@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block title %}
-    <title>Upload CSV File</title>
+    Upload CSV File
 {% endblock %}
 
 {% block content %}
@@ -17,7 +17,7 @@
             </div>
             {% if messages %}
                 {% for message in messages %}
-                    <div class="error-message mb-3">
+                    <div class="{{ message.tags }}-message mb-3">
                         {{ message }}
                     </div>
                 {% endfor %}
@@ -35,22 +35,23 @@
                 </div>
                 <small class="input-hint">Accepted File Types: .csv only</small>
                 <div class="button-container">
-                    <button type="submit" class="btn btn-success upload-button mt-2" disabled>Upload</button>
+                    <button type="submit" class="btn btn-success upload-button mt-2" id="upload-button" disabled>Upload</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
+        {# enables/disables upload button when file is selected #}
         $('input[type=file]').change(function () {
             if ($('input[type=file]').val() === '') {
-                $('button').attr('disabled', true)
+                $('#upload-button').attr('disabled', true)
             } else {
-                $('button').attr('disabled', false);
+                $('#upload-button').attr('disabled', false);
             }
         })
 
-
+        {# Updates the file input place holder with the selected files name #}
         $('#file-upload').change(function () {
             var i = $(this).next('label').clone();
             var file = $('#file-upload')[0].files[0].name;
