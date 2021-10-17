@@ -1,0 +1,60 @@
+{% extends 'equipment/base.html' %}
+{% load static %}
+
+{% block cssLinks %}
+    <link rel="stylesheet" href="{% static "uploadCSV/uploadCSV.css" %}">
+{% endblock %}
+
+{% block title %}
+    <title>Upload CSV File</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="upload-container">
+            <div class="upload-text py-3">
+                <h3>Upload File</h3>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="error-message mb-3">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input id="file-upload" type="file" accept=".csv" name="file" class="custom-file-input">
+                        <label class="custom-file-label">Choose file by dragging or browsing</label>
+                    </div>
+                </div>
+                <small class="input-hint">Accepted File Types: .csv only</small>
+                <div class="button-container">
+                    <button type="submit" class="btn btn-success upload-button mt-2" disabled>Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $('input[type=file]').change(function () {
+            if ($('input[type=file]').val() === '') {
+                $('button').attr('disabled', true)
+            } else {
+                $('button').attr('disabled', false);
+            }
+        })
+
+
+        $('#file-upload').change(function () {
+            var i = $(this).next('label').clone();
+            var file = $('#file-upload')[0].files[0].name;
+            $(this).next('label').text(file);
+        });
+    </script>
+{% endblock %}

@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # added applications
     'django.contrib.admindocs',
-    'accounts'
-    #'equipment', #For some reason, my pycharm is saying that this application label isn't unique
+    'accounts',
+    'equipment',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +62,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'equipment', 'templates'),
          ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -126,9 +125,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    'equipment/static'
-]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
