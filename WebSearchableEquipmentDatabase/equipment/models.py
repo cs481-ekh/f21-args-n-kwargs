@@ -46,8 +46,8 @@ class Category(models.Model):
         ("Other", "Other")
 
     )
-    category = models.CharField(max_length=200, null=True, choices=CATEGORY)
+    label = models.CharField(max_length=200, null=True, choices=CATEGORY)
     equipment = models.ForeignKey(Equipment, related_name="equipCat", on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.category}: {self.equipment.name}'
+        return f'{self.label}: {self.equipment.name}'
