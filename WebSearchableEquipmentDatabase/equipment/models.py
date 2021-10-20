@@ -32,3 +32,22 @@ class Equipment(models.Model):
 
     def __str__(self):
         return f'{self.name}, {self.model}'
+
+
+class Category(models.Model):
+    """Categories that allow improved searches of the equipment based on job characterization of equipment"""
+    CATEGORY = (
+        ("Processing", "Processing"),
+        ("Structural", "Structural"),
+        ("Chemical", "Chemical"),
+        ("Mechanical", "Mechanical"),
+        ("Electrical", "Electrical"),
+        ("Thermal", "Thermal"),
+        ("Other", "Other")
+
+    )
+    category = models.CharField(max_length=200, null=True, choices=CATEGORY)
+    equipment = models.ForeignKey(Equipment, related_name="equipCat", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.category}: {self.equipment.name}'
