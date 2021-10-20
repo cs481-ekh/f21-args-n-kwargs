@@ -1,5 +1,5 @@
 from django.test import TestCase
-from equipment.models import Equipment #Category
+from equipment.models import Equipment, Category
 
 
 class EquipmentModelTest(TestCase):
@@ -71,6 +71,29 @@ class EquipmentModelTest(TestCase):
         equip = Equipment.objects.get(id=1)
         permission_label = equip.permission
         self.assertEqual(permission_label, "Student")
+
+class CategoryModelTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Equipment.objects.create(name="Rotary Disc cutter",
+                                 model="Model 360",
+                                 manufacturer="South Bay",
+                                 year=2016,
+                                 pi="Steve Jobs",
+                                 contact="Steve Jobs",
+                                 room="CS1001",
+                                 lab="BSCMC",
+                                 description="Cutting 3 mm",
+                                 url="www.google.com",
+                                 permission="Student")
+
+    def test_category_equipment(self):
+        cat = Category.objects.create(category="Processing", equipment=Equipment.objects.get(id=1))
+        self.assertEqual("Rotary Disc cutter", cat.equipment.name)
+
+    def test_category_category(self):
+        cat = Category.objects.create(category="Processing", equipment=Equipment.objects.get(id=1))
+        self.assertEqual("Processing", cat.category)
 
 
 
