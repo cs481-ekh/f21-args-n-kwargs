@@ -1,3 +1,5 @@
+from abc import ABC
+
 from django.contrib import admin
 
 from equipment.models import Category, Equipment
@@ -11,6 +13,8 @@ class CategoryInline(admin.StackedInline):
 class EquipmentAdmin(admin.ModelAdmin):
     """Uses the inline category class to improve ease of use by admin to edit category with same interface
         as the equipment table"""
+    list_display = ('name', 'model', 'manufacturer', 'year', )
+    list_filter = ('name', 'model', 'manufacturer', 'permission', )
     inlines = [
         CategoryInline,
     ]

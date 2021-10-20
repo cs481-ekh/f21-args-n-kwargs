@@ -88,12 +88,12 @@ class CategoryModelTest(TestCase):
                                  permission="Student")
 
     def test_category_equipment(self):
-        cat = Category.objects.create(category="Processing", equipment=Equipment.objects.get(id=1))
+        cat = Category.objects.create(label="Processing", equipment=Equipment.objects.get(id=1))
         self.assertEqual("Rotary Disc cutter", cat.equipment.name)
 
     def test_category_category(self):
-        cat = Category.objects.create(category="Processing", equipment=Equipment.objects.get(id=1))
-        self.assertEqual("Processing", cat.category)
+        cat = Category.objects.create(label="Processing", equipment=Equipment.objects.get(id=1))
+        self.assertEqual("Processing", cat.label)
 
 
 
