@@ -4,12 +4,6 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-def max_value_current_year(value):
-    """small helper function to set max year allowed for equipment also together
-        allow validators on year field to be callable"""
-    return 3000
-
-
 # Create your models here.
 class Equipment(models.Model):
     """Equipment Model with associated fields to describe a new piece of equipment"""
@@ -21,7 +15,7 @@ class Equipment(models.Model):
     name = models.CharField(max_length=255)
     model = models.CharField(max_length=255)
     manufacturer = models.CharField(max_length=255)
-    year = models.IntegerField('year', validators=[MinValueValidator(1950), max_value_current_year])
+    year = models.IntegerField('year', validators=[MinValueValidator(1950), MaxValueValidator(3000)])
     pi = models.CharField(max_length=255)
     contact = models.TextField(blank=True, null=True)
     room = models.CharField(max_length=255, blank=True, null=True)
