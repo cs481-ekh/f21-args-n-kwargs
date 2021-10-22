@@ -45,3 +45,25 @@ class Category(models.Model):
 
     def __str__(self):
         return f'{self.label}: {self.equipment.name}'
+
+
+class Location(models.Model):
+    """Location that allow improved searches of the equipment based on location of equipment"""
+    LOCATION = (
+        ("BSCMC", "BSCMC"),
+        ("SSL", "SSL"),
+        ("MaCS", "MaCS"),
+        ("AML (CAES)", "AML (CAES)"),
+        ("AML (MSMSE)", "AML (MSMSE)"),
+        ("Materials Teaching Lab", "Materials Teaching Lab"),
+        ("Keck", "Keck"),
+        ("Other MSE Labs", "Other MSE Labs"),
+        ("Phys-Chem-Biol-Other", "Phys-Chem-Biol-Other"),
+        ("IML", "IML"),
+
+    )
+    location_label = models.CharField(max_length=200, null=True, choices=LOCATION)
+    equipment = models.ForeignKey(Equipment, related_name="equipment_location", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.location_label}: {self.equipment.name}'
