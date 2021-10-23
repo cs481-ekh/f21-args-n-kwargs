@@ -1,5 +1,5 @@
 from django.test import TestCase
-from equipment.models import Equipment, Category, Location
+from equipment.models import Equipment, Category, Center_Lab
 
 
 class EquipmentModelTest(TestCase):
@@ -12,8 +12,7 @@ class EquipmentModelTest(TestCase):
                                  year=2016,
                                  pi="Steve Jobs",
                                  contact="Steve Jobs",
-                                 room="CS1001",
-                                 lab="BSCMC",
+                                 location="BSCMC",
                                  description="Cutting 3 mm",
                                  url="www.google.com",
                                  permission="Student")
@@ -45,13 +44,8 @@ class EquipmentModelTest(TestCase):
 
     def test_equipment_room(self):
         equip = Equipment.objects.get(id=1)
-        room_label = equip.room
-        self.assertEqual(room_label, "CS1001")
-
-    def test_equipment_lab(self):
-        equip = Equipment.objects.get(id=1)
-        lab_label = equip.lab
-        self.assertEqual(lab_label, "BSCMC")
+        location_label = equip.location
+        self.assertEqual(location_label, "BSCMC")
 
     def test_equipment_description(self):
         equip = Equipment.objects.get(id=1)
@@ -82,8 +76,7 @@ class CategoryModelTest(TestCase):
                                  year=2016,
                                  pi="Steve Jobs",
                                  contact="Steve Jobs",
-                                 room="CS1001",
-                                 lab="BSCMC",
+                                 location="BSCMC",
                                  description="Cutting 3 mm",
                                  url="www.google.com",
                                  permission="Student")
@@ -106,16 +99,15 @@ class LocationModelTest(TestCase):
                                  year=2016,
                                  pi="Steve Jobs",
                                  contact="Steve Jobs",
-                                 room="CS1001",
-                                 lab="BSCMC",
+                                 location="CS1001",
                                  description="Cutting 3 mm",
                                  url="www.google.com",
                                  permission="Student")
 
     def test_location_equipment_instance(self):
-        location = Location.objects.create(location_label="BSCMC", equipment=Equipment.objects.get(id=1))
+        location = Center_Lab.objects.create(center_lab_label="BSCMC", equipment=Equipment.objects.get(id=1))
         self.assertEqual("Rotary Disc cutter", location.equipment.name)
 
     def test_category_category(self):
-        location = Location.objects.create(location_label="BSCMC", equipment=Equipment.objects.get(id=1))
-        self.assertEqual("BSCMC", location.location_label)
+        location = Center_Lab.objects.create(center_lab_label="BSCMC", equipment=Equipment.objects.get(id=1))
+        self.assertEqual("BSCMC", location.center_lab_label)
