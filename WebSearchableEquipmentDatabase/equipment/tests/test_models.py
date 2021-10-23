@@ -110,4 +110,4 @@ class LocationModelTest(TestCase):
 
     def test_category_category(self):
         location = Center_Lab.objects.create(center_lab_label="BSCMC", equipment=Equipment.objects.get(id=1))
-        self.assertEqual("BSCMC", location.location_label)
+        self.assertEqual("BSCMC", location.center_lab_label)
