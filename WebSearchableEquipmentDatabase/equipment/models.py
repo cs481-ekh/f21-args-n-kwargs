@@ -4,7 +4,6 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-# Create your models here.
 class Equipment(models.Model):
     """Equipment Model with associated fields to describe a new piece of equipment"""
     Permission = (
@@ -18,8 +17,7 @@ class Equipment(models.Model):
     year = models.IntegerField('year', validators=[MinValueValidator(1950), MaxValueValidator(3000)])
     pi = models.CharField(max_length=255)
     contact = models.TextField(blank=True, null=True)
-    room = models.CharField(max_length=255, blank=True, null=True)
-    lab = models.CharField(max_length=255)
+    location = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     url = models.TextField(blank=True, null=True)
     permission = models.CharField(max_length=255, choices=Permission)
@@ -47,8 +45,8 @@ class Category(models.Model):
         return f'{self.label}: {self.equipment.name}'
 
 
-class Location(models.Model):
-    """Location that allow improved searches of the equipment based on location of equipment"""
+class Center_Lab(models.Model):
+    """Center_Lab that allow improved searches of the equipment based on location of equipment"""
     LOCATION = (
         ("BSCMC", "BSCMC"),
         ("SSL", "SSL"),
@@ -62,8 +60,8 @@ class Location(models.Model):
         ("IML", "IML"),
 
     )
-    location_label = models.CharField(max_length=200, null=True, choices=LOCATION)
-    equipment = models.ForeignKey(Equipment, related_name="equipment_location", on_delete=models.CASCADE)
+    center_lab_label = models.CharField(max_length=200, null=True, choices=LOCATION)
+    equipment = models.ForeignKey(Equipment, related_name="equipment_center_lab", on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.location_label}: {self.equipment.name}'
+        return f'{self.center_lab_label}: {self.equipment.name}'

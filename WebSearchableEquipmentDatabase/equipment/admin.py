@@ -3,7 +3,7 @@ from abc import ABC
 from django.contrib import admin
 from django.contrib.admin import SimpleListFilter
 
-from equipment.models import Category, Equipment, Location
+from equipment.models import Category, Equipment, Center_Lab
 
 
 class CategoryInline(admin.StackedInline):
@@ -11,9 +11,9 @@ class CategoryInline(admin.StackedInline):
     model = Category
 
 
-class LocationInline(admin.StackedInline):
+class CenterLabInline(admin.StackedInline):
     """Creates a class that allows the admin to change location inline with equipment"""
-    model = Location
+    model = Center_Lab
 
 
 class CategoryFilter(SimpleListFilter):
@@ -51,9 +51,9 @@ class CategoryFilter(SimpleListFilter):
             return queryset.filter(equipCat__label__contains='other')
 
 
-class LocationFilter(SimpleListFilter):
-    title = "Location"
-    parameter_name = "location__location_label"
+class CenterLabFilter(SimpleListFilter):
+    title = "Center/Lab"
+    parameter_name = "center_label__center_lab_label"
 
     def lookups(self, request, model_admin):
         return (
@@ -74,34 +74,35 @@ class LocationFilter(SimpleListFilter):
         if not self.value():
             return queryset
         if self.value().lower() == 'bscmc':
-            return queryset.filter(equipment_location__location_label__contains='bscmc')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='bscmc')
         if self.value().lower() == 'ssl':
-            return queryset.filter(equipment_location__location_label__contains='ssl')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='ssl')
         if self.value().lower() == 'macs':
-            return queryset.filter(equipment_location__location_label__contains='macs')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='macs')
         if self.value().lower() == 'aml (caes)':
-            return queryset.filter(equipment_location__location_label__contains='aml (caes)')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='aml (caes)')
         if self.value().lower() == 'aml (msme)':
-            return queryset.filter(equipment_location__location_label__contains='aml (msme)')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='aml (msme)')
         if self.value().lower() == 'materials teaching lab':
-            return queryset.filter(equipment_location__location_label__contains='materials teaching lab')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='materials teaching lab')
         if self.value().lower() == 'keck':
-            return queryset.filter(equipment_location__location_label__contains='keck')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='keck')
         if self.value().lower() == 'other mse labs':
-            return queryset.filter(equipment_location__location_label__contains='other mse labs')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='other mse labs')
         if self.value().lower() == 'phys-chem-biol-other':
-            return queryset.filter(equipment_location__location_label__contains='phys-chem-biol-other')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='phys-chem-biol-other')
         if self.value().lower() == 'iml':
-            return queryset.filter(equipment_location__location_label__contains='iml')
+            return queryset.filter(equipment_center_lab__center_lab_label__contains='iml')
+
 
 class EquipmentAdmin(admin.ModelAdmin):
     """Uses the inline category class to improve ease of use by admin to edit category with same interface
         as the equipment table"""
     list_display = ('name', 'model', 'manufacturer', 'year',)
-    list_filter = ('name', 'model', 'manufacturer', 'permission', CategoryFilter, LocationFilter)
+    list_filter = ('name', 'model', 'manufacturer', 'permission', CategoryFilter, CenterLabFilter)
     inlines = [
         CategoryInline,
-        LocationInline
+        CenterLabInline
     ]
 
 
