@@ -6,10 +6,14 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Equipment(models.Model):
     """Equipment Model with associated fields to describe a new piece of equipment"""
+    student = "Student"
+    faculty = "Faculty"
+    guest = "Guest"
+
     Permission = (
-        ("Student", "Student"),
-        ("Faculty", "Faculty"),
-        ("Guest", "Guest"),
+        (student, "Student"),
+        (faculty, "Faculty"),
+        (guest, "Guest"),
     )
     name = models.CharField(max_length=255)
     model = models.CharField(max_length=255)
@@ -28,14 +32,22 @@ class Equipment(models.Model):
 
 class Category(models.Model):
     """Categories that allow improved searches of the equipment based on job characterization of equipment"""
+    processing = "Processing"
+    structural = "Structural"
+    chemical = "Chemical"
+    mechanical = "Mechanical"
+    electrical = "Electrical"
+    thermal = "Thermal"
+    other = "Other"
+
     CATEGORY = (
-        ("Processing", "Processing"),
-        ("Structural", "Structural"),
-        ("Chemical", "Chemical"),
-        ("Mechanical", "Mechanical"),
-        ("Electrical", "Electrical"),
-        ("Thermal", "Thermal"),
-        ("Other", "Other")
+        (processing, "Processing"),  # A
+        (structural, "Structural"),  # B
+        (chemical, "Chemical"),  # C
+        (mechanical, "Mechanical"),  # D
+        (electrical, "Electrical"),  # E
+        (thermal, "Thermal"),  # F
+        (other, "Other")  # O
 
     )
     label = models.CharField(max_length=200, null=True, choices=CATEGORY)
