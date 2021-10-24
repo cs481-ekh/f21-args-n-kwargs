@@ -6,6 +6,20 @@ from django.contrib import messages
 from .models import Equipment
 from .models import Center_Lab
 from .models import Category
+from forms import EquipmentForm
+
+
+# The C in CRUD
+def create_equipment(request):
+    form = EquipmentForm()
+    if request.POST:
+        form = EquipmentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form': form}
+    # TODO: @michael update with actual template
+    return render(request, 'equipment/equipmentForm.html', context)
 
 
 def index(request):
