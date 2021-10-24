@@ -6,7 +6,7 @@ from django.contrib import messages
 from .models import Equipment
 from .models import Center_Lab
 from .models import Category
-from forms import EquipmentForm
+from .forms import EquipmentForm
 
 
 # The C in CRUD
