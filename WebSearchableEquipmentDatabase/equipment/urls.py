@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
     path('base/', views.index),
-    path('dataTable/', views.dataTable, name='home'),
+    path('datatable/', views.data_table, name='home'),
     path('uploadcsv/', views.upload_csv, name='uploadCSV'),
 ]

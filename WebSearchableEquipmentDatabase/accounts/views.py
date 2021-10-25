@@ -9,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .models import Account
 
 from .utils import account_activation_token
-from accounts.forms import AccountCreationForm
+from .forms import AccountCreationForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
 from django.contrib.auth import logout as django_logout
@@ -78,7 +78,7 @@ def user_verification(request, uidb64, token):
             if email == 'u.boisestate.edu':
                 group = Group.objects.get(name='student')
             elif email == 'boisestate.edu':
-                group = Group.objects.get(name='teacher')
+                group = Group.objects.get(name='faculty')
             else:
                 group = Group.objects.get(name='guest')
             user.groups.add(group)
