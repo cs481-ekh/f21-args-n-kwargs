@@ -1,15 +1,21 @@
 import csv
 import re
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import Group
+# from django.views.decorators.http
 from django.contrib import messages
 from .models import Equipment
 from .models import Center_Lab
 from .models import Category
 from .forms import EquipmentForm
+from .decorators import allowed_groups
 
 
 # The C in CRUD
+@login_required
+@allowed_groups(allowed_groups=['faculty'])
 def create_equipment(request):
     form = EquipmentForm()
     if request.POST:
@@ -26,8 +32,21 @@ def index(request):
     return render(request, 'equipment/base.html')
 
 
-def dataTable(request):
-    context = {'dataTable': True, 'user': request.user}
+def filter_data(request, locations, categories):
+    context = {'dataTable': True,
+               'user': request.user,
+               'show_controls': request.user.groups.all().filter(name="faculty").exists(),
+               'data': Equipment.objects().all().filter(location, locations)
+               }
+    return render(request, 'equipment/dataTable.html', context);
+
+
+def data_table(request):
+    context = {'dataTable': True,
+               'user': request.user,
+               'show_controls': request.user.groups.all().filter(name="faculty").exists(),
+               'data': Equipment.objects.all()
+               }
     return render(request, 'equipment/dataTable.html', context)
 
 

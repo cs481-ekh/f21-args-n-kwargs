@@ -2,21 +2,20 @@
 {% load static %}
 {% block cssLinks %}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+{#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">#}
     <link rel="stylesheet" type="text/css" href="{% static "dataTable/dataTable.css" %}">
 {% endblock %}
 
 {% block jsLinks %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>$.fn.selectpicker.Constructor.BootstrapVersion = "4.6.0"</script>
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>#}
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 {% endblock %}
 
 {% block content %}
     <div class="container" style="margin: 5px; max-width: 90%;">
         <div class="row">
-            <div id="filterContainer" class="col col-4">
+            <div id="filterContainer" class="col col-2">
                 <label>Locations</label>
                 <select id="locationPicker" data-live-search="true" multiple selected="-1">
                     <option value="-1" disabled hidden>Select a location</option>
@@ -39,7 +38,14 @@
                 <label>Another Filter Option</label>
 
             </div>
-            <div id="dataTableContainer" class="col col-8">
+            <div class="col col-1"></div>
+            <div id="dataTableContainer" class="col col-9">
+                {% if show_controls %}
+                <button class="btn btn-success" id="addEquipmentButton" data-toggle="modal" data-target="#equipmentModal" style="margin-bottom: 5px">Add Item <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" style="" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+</svg></button>
+                {% endif %}
+
                 <table id="dataTable" class="hover cell-border order-column"> {# https://datatables.net/manual/styling/classes #}
                     <thead>
                         <tr>
@@ -49,6 +55,9 @@
                             <th>Location</th>
                             <th>Owner of Equipment</th>
                             <th>Categories</th>
+                            {% if show_controls %}
+                            <th>Controls</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -59,6 +68,18 @@
                             <td>Boise State University</td>
                             <td>Ian Whitney</td>
                             <td>High Heat, Thermal Measuring</td>
+                            {% if show_controls %}
+                            <td class="controls">
+                                <button class="btn btn-info editEquipmentButton" data-toggle="modal" data-target="#equipmentModal" data-id="toBeFilled"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+</svg></button>
+                                <!--Removal button-->
+                                <button class="btn btn-danger removeEquipmentButton" data-id="toBeFilled"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+  <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+</svg></button>
+                            </td>
+                            {% endif %}
                         </tr>
                         <tr>
                             <td>Graduated Cylinder</td>
@@ -66,6 +87,18 @@
                             <td>Some place in Pocatello</td>
                             <td>Nick Stolarow</td>
                             <td>Physical Properties, High Capacty</td>
+                            {% if show_controls %}
+                            <td class="controls">
+                                <button class="btn btn-info editEquipmentButton" data-toggle="modal" data-target="#equipmentModal" data-id="toBeFilled"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+</svg></button>
+                                <!--Removal button-->
+                                <button class="btn btn-danger removeEquipmentButton" data-id="toBeFilled"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+  <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+</svg></button>
+                            </td>
+                            {% endif %}
                         </tr>
                         <tr>
                             <td>Really big stick</td>
@@ -73,9 +106,37 @@
                             <td>Micron</td>
                             <td>Michael Cleverdon</td>
                             <td>Misc</td>
+                            {% if show_controls %}
+                            <td class="controls">
+                                <button class="btn btn-info editEquipmentButton" data-toggle="modal" data-target="#equipmentModal" data-id="toBeFilled"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+</svg></button>
+                                <!--Removal button-->
+                                <button class="btn btn-danger removeEquipmentButton" data-id="toBeFilled"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+  <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+</svg></button>
+                            </td>
+                            {% endif %}
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="equipmentModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="equipmentModalTitle">Add/Edit Equipment</h5>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="saveEquipmentButton" class="btn btn-primary" data-dismiss="modal">Save Equipment</button>
+                </div>
             </div>
         </div>
     </div>
@@ -85,7 +146,24 @@
     <script>
         $(function(){
            $('#dataTable').DataTable();
-           $('#locationPicker').selectpicker();
+           $(".removeEquipmentButton").click(function(){
+               console.log($(this).parent().parent().children(":first").text());
+                confirm(`Are you sure you want to delete this piece of equipment: ${$(this).parent().parent().children(":first").text()}?`)
+           });
+           $(".editEquipmentButton").click(function(){
+               //Set some hidden id in the modal to the id in the data-id attribute
+               //$(attributeToBeFilled).val($(this).attr('data-id'))
+           });
+
+           //This is in the modal
+           $("#saveEquipmentButton").click(function(){
+               /*
+               *if(id > 0)
+               * $.post('/editEquipment', {dataToBeFilled}, success, fail);
+               * else
+               * $.post('/saveEquipment', {dataToBeFilled}, success, fail);
+                */
+           });
         });
     </script>
 {% endblock %}

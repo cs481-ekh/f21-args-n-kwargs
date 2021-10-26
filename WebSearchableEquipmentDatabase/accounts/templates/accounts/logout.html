@@ -14,7 +14,7 @@
     <title>Logout</title>
 </head>
 <body>
-    <p>You have been logged out. You will be redirected in <span id="countdown">3</span> seconds. If you are not redirected <a href="/equipment/dataTable">click Here.</a></p>
+    <p>You have been logged out. You will be redirected in <span id="countdown">3</span> seconds. If you are not redirected <a href="/equipment/datatable">click Here.</a></p>
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function(){
@@ -22,7 +22,7 @@
         const countdownFunction = async () => setTimeout(function(){
             document.querySelector('#countdown').innerHTML = --timeLeft;
             if(timeLeft == 0){
-                window.location.href="/equipment/dataTable";
+                window.location.href="/equipment/datatable";
             }
             else
                 countdownFunction();

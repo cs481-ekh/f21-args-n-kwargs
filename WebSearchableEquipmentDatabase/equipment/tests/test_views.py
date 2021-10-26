@@ -6,7 +6,7 @@ from django.test import TestCase
     #     response = self.client.get("/equipment/base")
     #     self.assertEqual(response.status_code, HTTPStatus.OK)
     # def test_home_view(self):
-    #     response = self.client.get("/equipment/dataTable")
+    #     response = self.client.get("/equipment/datatable")
     #     self.assertEqual(response.status_code, HTTPStatus.OK)
     # def test_data_retrieval(self):
     #     return True #TODO finish this when data is implemented on home page
