@@ -36,16 +36,23 @@ def filter_data(request, locations, categories):
     context = {'dataTable': True,
                'user': request.user,
                'show_controls': request.user.groups.all().filter(name="faculty").exists(),
-               'data': Equipment.objects().all().filter(location, locations)
+               'data': Equipment.objects().all().filter(location__in=locations).filter(category__in=categories)
                }
     return render(request, 'equipment/dataTable.html', context);
 
 
 def data_table(request):
+    equipmentObjects = Equipment.objects.all()
+    if request.user.groups.all().filter(name="student"):
+        equipmentObjects = equipmentObjects.exclude(permission="faculty")
+    elif request.user.groups.all().filter(name="guest"):
+        equipmentObjects = equipmentObjects.filter(permission="guest")
     context = {'dataTable': True,
                'user': request.user,
                'show_controls': request.user.groups.all().filter(name="faculty").exists(),
-               'data': Equipment.objects.all()
+               'data': equipmentObjects,
+               'categories': Category.CATEGORY,
+               'form': EquipmentForm
                }
     return render(request, 'equipment/dataTable.html', context)
 

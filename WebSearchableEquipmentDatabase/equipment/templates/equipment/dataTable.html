@@ -17,25 +17,25 @@
         <div class="row">
             <div id="filterContainer" class="col col-2">
                 <label>Locations</label>
-                <select id="locationPicker" data-live-search="true" multiple selected="-1">
-                    <option value="-1" disabled hidden>Select a location</option>
-                    <option>These options</option>
-                    <option>Will have to be</option>
-                    <option>Populated</option>
-                    <option>With Real Data</option>
-                </select>
-                <br><hr>
-                <label>Select some categories</label>
-                <ul class="filterList">
+                <ul id="locationList">
 
                     {# TODO, make this work with real data #}
-                    <li><input type="checkbox" name="name1"> Category1</li>
-                    <li><input type="checkbox" name="name2"> Category2</li>
-                    <li><input type="checkbox" name="name3"> Category3</li>
-                    <li><input type="checkbox" name="name4"> Misc</li>
+                    <li><input type="checkbox" name="location[]" value="Micron"> Micron</li>
+                    <li><input type="checkbox" name="location[]" value="Boise State University"> Boise State University</li>
+                    <li><input type="checkbox" name="location[]" value="ANML"> Category3</li>
+                    <li><input type="checkbox" name="location[]" value="Place"> Misc</li>
                 </ul>
+                    <button type="button" class="btn btn-primary applyFilters" id="locationApplyFilters" style="display: none;">Apply</button>
                 <br><hr>
-                <label>Another Filter Option</label>
+                {% if categories %}
+                    <label>Categories</label>
+                    <ul id="categoryList">
+                    {% for categoryId, categoryName in categories %}
+                        <li><input type="checkbox" name="category[]" value="{{ categoryId }}"> {{ categoryName }}</li>
+                    {% endfor %}
+                    </ul>
+                    <button type="button" class="btn btn-primary applyFilters" id="categoryApplyFilters" style="display: none;">Apply</button>
+                {% endif %}
 
             </div>
             <div class="col col-1"></div>
@@ -131,7 +131,7 @@
                     <h5 class="modal-title" id="equipmentModalTitle">Add/Edit Equipment</h5>
                 </div>
                 <div class="modal-body">
-
+                    {{ form.as_p }}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -164,6 +164,38 @@
                * $.post('/saveEquipment', {dataToBeFilled}, success, fail);
                 */
            });
+           $('.applyFilters').click(function(){
+               let locations = checkboxesToArray("location[]");
+               let categories = checkboxesToArray("category[]");
+               console.log(categories);
+               console.log(locations);
+           });
+
+           $('#locationList input').change(function(){
+              if($("#locationList input[type=checkbox]:checked").length > 0){
+                  $('#locationApplyFilters').show();
+              }
+              else if ($('#locationList input[type=checkbox]:checked').length == 0){
+                  $('#locationApplyFilters').hide();
+              }
+           });
+
+           $('#categoryList input').change(function(){
+              if($("#categoryList input[type=checkbox]:checked").length > 0){
+                  $('#categoryApplyFilters').show();
+              }
+              else if ($('#categoryList input[type=checkbox]:checked').length == 0){
+                  $('#categoryApplyFilters').hide();
+              }
+           });
+
+           function checkboxesToArray(nameOfCheckboxes){
+               let values = new Array();
+                $.each($(`input[name='${nameOfCheckboxes}']:checked`), function(){
+                    values.push($(this).val());
+                });
+                return values;
+           }
         });
     </script>
 {% endblock %}
