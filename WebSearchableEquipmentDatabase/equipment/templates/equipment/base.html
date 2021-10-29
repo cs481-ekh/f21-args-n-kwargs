@@ -18,14 +18,14 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Equipment Database</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Equipment Database</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link {% if dataTable %}active{% endif %}" href="/equipment/dataTable">Home <span
+                <a class="nav-item nav-link {% if dataTable %}active{% endif %}" href="{% url 'home' %}">Home <span
                         class="sr-only">(current)</span></a>
                 {% if user.is_superuser %}
                     <a class="nav-item nav-link {% if upload_csv %}active{% endif %}" href="{% url 'uploadCSV' %}">Upload
