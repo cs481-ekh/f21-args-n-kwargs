@@ -3,6 +3,9 @@ from . import views
 from django.contrib.auth import views as auth_views
 from .forms import UserPasswordResetForm, UserPasswordConfirmForm
 
+from .forms import UserPasswordResetForm, UserPasswordConfirmForm
+
+
 urlpatterns = [
     # path('', views.home, name='home'),
     path('login/', views.login, name='login'),
