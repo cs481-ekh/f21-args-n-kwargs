@@ -25,7 +25,7 @@ SECRET_KEY = '15wm^8_n1rr-a2-&*yx2bgsqfq5n@$9%m&$7m(i6$q^0tu1soj'  # TODO: gener
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # TODO: change to false once in production
 
-ALLOWED_HOSTS = []  # TODO: will need to be the url our website is hosted at once in production
+ALLOWED_HOSTS = ['127.0.0.1', '132.178.215.41', 'localhost']  # TODO: will need to be the url our website is hosted at once in production
 
 # Application definition
 
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []  # TODO: will need to be the url our website is hosted at onc
 AUTH_USER_MODEL = 'accounts.Account'
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -137,3 +138,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = '<your gmail here>'
 EMAIL_HOST_PASSWORD = '<password here>'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
