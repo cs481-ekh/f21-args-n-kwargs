@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     # This will put every link in the equipment.urls.py file under equipment/{methodName}
-    path('equipment/', include('equipment.urls'))
+    path('', include('equipment.urls'))
 
 
 ]

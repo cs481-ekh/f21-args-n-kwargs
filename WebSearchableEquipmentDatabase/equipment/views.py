@@ -38,7 +38,7 @@ def filter_data(request, locations, categories):
                'show_controls': request.user.groups.all().filter(name="faculty").exists(),
                'data': Equipment.objects().all().filter(location__in=locations).filter(category__in=categories)
                }
-    return render(request, 'equipment/dataTable.html', context);
+    return render(request, 'equipment/dataTable.html', context)
 
 
 def data_table(request):
@@ -119,3 +119,13 @@ def upload_csv(request):
     # Example: <a class="nav-item nav-link {% if upload_csv %}active{% endif %}">Upload File</a>
     context = {'upload_csv': True, 'user': request.user}
     return render(request, 'equipment/uploadCSV.html', context)
+
+
+def testing(request):
+    form = EquipmentForm()
+    if request.method == "POST":
+        form = EquipmentForm(request.POST)
+        if form.is_valid():
+            pass
+    content = {'form': form}
+    return render(request, 'equipment/testingEquipmentForm.html', content)
