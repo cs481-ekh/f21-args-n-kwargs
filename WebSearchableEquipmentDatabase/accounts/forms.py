@@ -37,3 +37,17 @@ class UserPasswordResetForm(PasswordResetForm):
     }))
 
 
+
+class UserPasswordConfirmForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordConfirmForm, self).__init__(*args, **kwargs)
+
+    new_password1 = forms.CharField(label='', widget=forms.PasswordInput(attrs={
+        'placeholder': 'New Password',
+        'class': 'form-control'
+    }))
+
+    new_password2 = forms.CharField(label='', widget=forms.PasswordInput(attrs={
+        'placeholder': 'New password confirmation',
+        'class': 'form-control'
+    }))
