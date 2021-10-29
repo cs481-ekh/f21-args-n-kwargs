@@ -37,6 +37,7 @@ class UserPasswordResetForm(PasswordResetForm):
     }))
 
 
+
 class UserPasswordConfirmForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super(UserPasswordConfirmForm, self).__init__(*args, **kwargs)
