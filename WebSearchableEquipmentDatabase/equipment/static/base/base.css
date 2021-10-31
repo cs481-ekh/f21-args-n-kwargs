@@ -1,0 +1,12 @@
+/* footer for bottom middle of page*/
+footer {
+    font-size: 14px;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    color: #777;
+    text-align: center;
+}

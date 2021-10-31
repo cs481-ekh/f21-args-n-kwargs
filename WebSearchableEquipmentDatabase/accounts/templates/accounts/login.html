@@ -1,44 +1,41 @@
+{% extends 'equipment/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
-    <!-- Stylesheets -->
+{% block cssLinks %}
     <link rel="stylesheet" href="{% static "auth/login.css" %}">
+{% endblock %}
 
-    <title>Login</title>
-</head>
-<body>
-<div class="container">
-    <div class="login-container">
-        <h2 class="login-text py-3">Log in</h2>
-        {% if messages %}
-            {% for message in messages %}
-                <div class="error-message py-2 px-2 mb-3">
-                    {{ message }}
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="login-container">
+            <h2 class="login-text py-3">Log in</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="error-message py-2 px-2 mb-3">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group pb-3">
+                    <input type="email" name="username" class="form-control" id="email-input"
+                           placeholder="Email address">
                 </div>
-            {% endfor %}
-        {% endif %}
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group pb-3">
-                <input type="email" name="username" class="form-control" id="email-input" placeholder="Email address">
-            </div>
-            <div class="form-group pb-2">
-                <input type="password" name="password" class="form-control" id="password-input" placeholder="Password">
-                <a href="{% url 'reset_password' %}" class="forgot-password">FORGOT?</a>
-            </div>
-            <div class="button-container pb-1">
-                <button class="login-button btn btn-success mr-2" type="submit">Log in</button>
-                <a href="{% url 'register' %}" class="register-button btn btn-primary ml-2">Register</a>
-            </div>
-        </form>
+                <div class="form-group pb-2">
+                    <input type="password" name="password" class="form-control" id="password-input"
+                           placeholder="Password">
+                    <a href="{% url 'reset_password' %}" class="forgot-password">FORGOT?</a>
+                </div>
+                <div class="button-container pb-1">
+                    <button class="login-button btn btn-success mr-2" type="submit">Log in</button>
+                    <a href="{% url 'register' %}" class="register-button btn btn-primary ml-2">Register</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-</body>
-</html>
+{% endblock %}

@@ -91,8 +91,4 @@ def user_verification(request, uidb64, token):
 
 def logout(request):
     django_logout(request)
-    return render(request, 'accounts/logout.html')
-
-
-def home(request):
-    return render(request, 'accounts/dashboard.html')
+    return redirect('home')
