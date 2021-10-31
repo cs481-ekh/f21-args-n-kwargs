@@ -22,7 +22,7 @@
                     </div>
                 {% endfor %}
             {% endif %}
-            <form method="post">
+            <form method="post"> {# TODO: enctype="multipart/form-data" #}
                 {% csrf_token %}
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -35,7 +35,9 @@
                 </div>
                 <small class="input-hint">Accepted File Types: .csv only</small>
                 <div class="button-container">
-                    <button type="submit" class="btn btn-success upload-button mt-2" id="upload-button" disabled>Upload</button>
+                    <button type="submit" class="btn btn-success upload-button mt-2" id="upload-button" disabled>
+                        Upload
+                    </button>
                 </div>
             </form>
         </div>

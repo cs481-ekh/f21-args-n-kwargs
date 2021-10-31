@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "base/base.css" %}">
     {% block cssLinks %}{% endblock %}
     {% block inlineCSS %}{% endblock %}
     {% block jsLinks %}{% endblock %}
@@ -33,11 +35,12 @@
                 {% endif %}
                 {% if show_controls %}
                     {% csrf_token %}
-                        <button class="nav-item nav-link"  data-toggle="modal" data-target="#equipmentModal" style="border:none; background-color: rgba(0,0,0,.0001)" >Add Item
-{#                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" style="" viewBox="0 0 16 16">#}
-{#                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>#}
-{#                            </svg>#}
-                        </button>
+                    <button class="nav-item nav-link" data-toggle="modal" data-target="#equipmentModal"
+                            style="border:none; background-color: rgba(0,0,0,.0001)">Add Item
+                        {#                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" style="" viewBox="0 0 16 16">#}
+                        {#                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>#}
+                        {#                            </svg>#}
+                    </button>
                 {% endif %}
             </div>
             <div class="nav-item mr-sm-2">
@@ -61,9 +64,9 @@
     {% endblock %}
 </div>
 {% block inlineJS %}{% endblock %}
-</body>
+
 <footer>
-    {% block footer %}{% endblock %}
-    &copy;2021 Boise State University. All rights reserved.
+    <p>&copy;2021 Boise State University. All rights reserved.</p>
 </footer>
+</body>
 </html>
