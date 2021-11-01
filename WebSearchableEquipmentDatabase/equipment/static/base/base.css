@@ -1,12 +1,80 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.site-wrapper {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Sets the background color of the navbar */
+.navbar-custom {
+    background-color: rgb(12, 54, 154);
+}
+
+/* Sets the color of the nav items i.e. 'Hello <email>' */
+.nav-item {
+    color: white;
+}
+
+/* Sets the color of the nav bar links i.e. 'Home', 'Upload Data', etc */
+.nav-link {
+    color: white;
+    border-bottom: 2px solid rgb(12, 54, 154);
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.active {
+    border-bottom: 2px solid rgb(198, 78, 36);
+    /*transition: all .15s ease-in-out*/
+}
+
+.navbar {
+    padding-right: 0;
+}
+
+.navbar-expand-lg {
+    padding-right: 0;
+}
+
+/* Sets the color of the 'Equipment Database' text */
+.navbar-brand {
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: white;
+}
+
+/* Orange button */
+.login-logout {
+    background-color: rgb(198, 78, 36);
+    color: white;
+    padding: 20px 30px 20px 30px;
+    margin-right: 0;
+}
+
+.login-logout:hover {
+    background-color: rgb(173, 61, 27);
+    color: white;
+    text-decoration: none;
+}
+
 /* footer for bottom middle of page*/
 footer {
     font-size: 14px;
-    padding: 20px;
+    padding: 10px;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #f5f5f5;
-    color: #777;
+    background-color: rgb(12, 54, 154);
+    color: white;
     text-align: center;
 }

@@ -19,7 +19,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="navbar-brand" href="{% url 'home' %}">Equipment Database</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,10 +27,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link {% if dataTable %}active{% endif %}" href="{% url 'home' %}">Home <span
+                <a class="nav-link {% if dataTable %}active{% endif %}" href="{% url 'home' %}">Home <span
                         class="sr-only">(current)</span></a>
                 {% if user.is_superuser %}
-                    <a class="nav-item nav-link {% if upload_csv %}active{% endif %}" href="{% url 'uploadCSV' %}">Upload
+                    <a class="nav-link {% if upload_csv %}active{% endif %}" href="{% url 'uploadCSV' %}">Upload
                         Data</a>
                 {% endif %}
                 {% if show_controls %}
@@ -48,25 +48,27 @@
                     <span class="navbar-text">Hello {{ user.email }}</span>
                 {% endif %}
             </div>
-            <div class="nav-item mr-sm-2">
+            <div class="nav-item">
                 {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" style="text-align: right;" href="/logout">Logout</a>
+                    <a class="login-logout" style="text-align: right;" href="/logout">Log out</a>
                 {% else %}
-                    <a class="nav-item nav-link" style="text-align: right;" href="/login">Login</a>
+                    <a class="login-logout" style="text-align: right;" href="/login">Log in</a>
                 {% endif %}
             </div>
         </div>
     </nav>
 </header>
-<div id="siteWrapper">
+<div class="site-wrapper">
     {% block content %}
         Base Content that should always be overwritten
     {% endblock %}
 </div>
 {% block inlineJS %}{% endblock %}
 
-<footer>
-    <p>&copy;2021 Boise State University. All rights reserved.</p>
-</footer>
+<div>
+    <footer>
+        &copy;2021 Boise State University. All rights reserved.
+    </footer>
+</div>
 </body>
 </html>
