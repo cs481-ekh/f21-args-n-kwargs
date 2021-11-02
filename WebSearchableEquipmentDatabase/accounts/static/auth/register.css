@@ -9,6 +9,13 @@ html, body {
     align-items: center;
 }
 
+.background {
+    position: absolute;
+    z-index: -100;
+    width: 100%;
+    height: 100%;
+}
+
 .register-container {
     background-color: white;
     padding: 20px;
@@ -16,10 +23,6 @@ html, body {
     width: 500px;
     border: 1px solid lightgray;
     border-radius: 5px;
-}
-
-.register-text {
-    text-align: center;
 }
 
 .errorlist {
@@ -38,6 +41,15 @@ html, body {
 
 .register-button {
     flex: 1;
+    border: none;
+    background-color: rgb(198, 78, 36);
+    color: white;
+
+}
+
+.register-button:hover {
+    background-color: rgb(173, 61, 27);
+    color: white;
 }
 
 .existing-account {
