@@ -2,6 +2,7 @@ import csv
 import re
 
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 # from django.views.decorators.http
@@ -129,3 +130,12 @@ def testing(request):
             pass
     content = {'form': form}
     return render(request, 'equipment/testingEquipmentForm.html', content)
+
+
+def delete_equipment(request):
+    id1 = request.GET.get('id', None)
+    Equipment.objects.get(id=id1).delete()
+    data = {
+        'deleted': True
+    }
+    return JsonResponse(data)
