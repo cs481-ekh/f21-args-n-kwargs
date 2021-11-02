@@ -136,22 +136,23 @@
         $(function () {
             $('#dataTable').DataTable();
             $(".removeEquipmentButton").click(function () {
-                let action = confirm("Are you sure you want to delete this item? " + $(".removeEquipmentButton").attr('data-id'));
-                if (action !== false) {
-                $.ajax({
-                    url: '{% url "crud_ajax_delete" %}',
-                    data: {
-                        'id': id,
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.deleted) {
-                            alert('Success');
-                            setTimeout(function(){// wait
-                            location.reload(); // then reload the page.
-                                }, 1);
+                let id = + $(".removeEquipmentButton").attr('data-id');
+                let action = confirm("Are you sure you want to delete this item? " );
+                if (action !== false){
+                    $.ajax({
+                        url : '{% url "crud_delete" %}',
+                        data: {'id' : id,},
+                        dataType: 'json',
+                        success: function(data){
+                            if(data.deleted) {
+                                alert('Success');
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1)
+                            }
                         }
-                    }
+                    })
+                }
             });
             $(".editEquipmentButton").click(function () {
                 //Set some hidden id in the modal to the id in the data-id attribute

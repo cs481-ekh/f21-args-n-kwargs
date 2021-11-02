@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.data_table, name='home'),
     path('uploadcsv/', views.upload_csv, name='uploadCSV'),
     path('testing', views.testing, name='testing'),
-    path('ajax/crud/delete/', views.DeleteEquipm.as_view(), name='crud_ajax_delete'),
+    path('crud/delete/', views.delete_equipment, name='crud_delete'),
 ]
