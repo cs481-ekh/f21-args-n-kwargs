@@ -5,7 +5,7 @@ from django.urls import reverse
 from accounts.forms import AccountCreationForm
 
 
-class TestViews(SimpleTestCase):
+class TestViews(TestCase):
 
     def test_accounts_login_is_resolved(self):
         response = self.client.get(reverse('login'))
