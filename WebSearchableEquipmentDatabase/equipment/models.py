@@ -18,7 +18,7 @@ class Equipment(models.Model):
     name = models.CharField(max_length=255)
     model = models.CharField(max_length=255)
     manufacturer = models.CharField(max_length=255)
-    year = models.IntegerField('year', validators=[MinValueValidator(1950), MaxValueValidator(3000)])
+    year = models.CharField(max_length=255)
     pi = models.CharField(max_length=255)
     contact = models.TextField(blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)

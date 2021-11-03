@@ -1,10 +1,9 @@
 import csv
-import re
+import os
+import uuid
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import Group
-# from django.views.decorators.http
 from django.contrib import messages
 from .models import Equipment
 from .models import Center_Lab
@@ -57,10 +56,26 @@ def data_table(request):
     return render(request, 'equipment/dataTable.html', context)
 
 
+def save_file(file):
+    directory = 'fileUploads/'
+    file_name = uuid.uuid4()
+    path = directory + str(file_name) + '.csv'
+    with open(path, 'wb+') as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
+
+    return path
+
+
+def delete_file(path):
+    os.remove(path)
+    return
+
+
 def upload_csv(request):
     error = False
-    if not request.user.is_superuser:
-        return redirect('home')
+    processed_file = False
+    path = ''
     if request.POST:
         category_map = {
             "A": Category.processing,
@@ -71,8 +86,7 @@ def upload_csv(request):
             "F": Category.thermal,
             "O": Category.other,
         }
-        regex = re.compile('[^A-Z]')  # Only allow uppercase alphabetic strings
-        file = request.POST.get('file', False)
+        file = request.FILES['file']
         if not file:
             messages.error(request, "Please select a file to be uploaded.")
             error = True
@@ -80,43 +94,48 @@ def upload_csv(request):
             messages.error(request, "File must be a .csv")
             error = True
 
-        with open(file) as f:
-            reader = csv.reader(f)
-            for row in reader:
-                obj, created = Equipment.objects.get_or_create(
-                    name=row[0],
-                    model=row[1],
-                    manufacturer=row[2],
-                    year=row[3],
-                    pi=row[4],
-                    contact=row[5],
-                    location=row[7],
-                    description=row[8],
-                    url=row[10],
-                    permission=Equipment.guest,  # TODO: update accordingly
-                )
-
-                Center_Lab.objects.create(
-                    center_lab_label=row[6],
-                    equipment=obj
-                ),
-
-                # This bit of code handles multiple categories for a piece of equipment
-                for col in row[9]:
-                    col = col.upper()  # Always uppercase
-                    col = regex.sub('', col)  # Strip non-uppercase/non-alphabetic characters
-                    Category.objects.create(
-                        label=category_map[col],
-                        equipment=obj
-                    )
-
         if not error:
-            messages.success(request, "File uploaded successfully!")
-        else:
-            messages.error(request, "There was an error processing your file.")
+            try:
+                path = save_file(file)
+                processed_file = True
+                with open(path) as f:
+                    reader = csv.reader(f)
+                    for row in reader:
+                        obj, created = Equipment.objects.get_or_create(
+                            name=row[0],
+                            model=row[1],
+                            manufacturer=row[2],
+                            year=row[3],
+                            pi=row[4],
+                            contact=row[5],
+                            location=row[7],
+                            description=row[8],
+                            url=row[10],
+                            permission=Equipment.guest,  # TODO: update accordingly
+                        )
 
-    # Used to dynamically set the nav bar link to active.
-    # Example: <a class="nav-item nav-link {% if upload_csv %}active{% endif %}">Upload File</a>
+                        Center_Lab.objects.create(
+                            center_lab_label=row[6],
+                            equipment=obj
+                        ),
+
+                        # This bit of code handles multiple categories for a piece of equipment
+                        sanitized = row[9].replace(" ", "").upper()
+                        split = sanitized.split(',')
+                        for val in split:
+                            Category.objects.create(
+                                label=category_map[val],
+                                equipment=obj
+                            )
+
+                    messages.success(request, "File uploaded successfully!")
+            except Exception:
+                error = True
+
+    if error:
+        messages.error(request, "There was an error processing your file.")
+    if processed_file:
+        delete_file(path)
     context = {'upload_csv': True, 'user': request.user}
     return render(request, 'equipment/uploadCSV.html', context)
 
