@@ -52,7 +52,8 @@ def data_table(request):
                'show_controls': request.user.groups.all().filter(name="faculty").exists(),
                'data': equipmentObjects,
                'categories': Category.CATEGORY,
-               'form': EquipmentForm
+               'form': EquipmentForm,
+               'home': True,
                }
     return render(request, 'equipment/dataTable.html', context)
 
@@ -73,6 +74,8 @@ def delete_file(path):
     return
 
 
+@login_required
+@allowed_groups(allowed_groups=['faculty'])
 def upload_csv(request):
     processed_file = False
     path = ''

@@ -34,7 +34,7 @@
                         <a class="nav-item nav-link {% if upload_csv %}active{% endif %}" href="{% url 'uploadCSV' %}">Upload
                             Data</a>
                     {% endif %}
-                    {% if show_controls %}
+                    {% if show_controls and home %}
                         {% csrf_token %}
                         <button class="nav-item nav-link" data-toggle="modal" data-target="#equipmentModal"
                                 style="border:none; background-color: rgba(0,0,0,.0001)">Add Item
