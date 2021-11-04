@@ -17,35 +17,59 @@
     <div class="container" style="margin: 5px; max-width: 90%;">
         <div class="row">
             <div id="filterContainer" class="col col-2">
-                <label>Locations</label>
-                <ul id="locationList">
-
-                    {# TODO, make this work with real data #}
-                    <li><input type="checkbox" name="location[]" value="Micron"> Micron</li>
-                    <li><input type="checkbox" name="location[]" value="Boise State University"> Boise State University
+                <hr>
+                <h3 class="px-3">Filter</h3>
+                <hr>
+                <label class="filter-label mb-3 px-3">Locations</label>
+                <ul id="locationList" class="px-3"> {# TODO: make this work with real data #}
+                    <li>
+                        <label class="check-options">
+                            <input type="checkbox" name="location[]" value="Micron">
+                            Micron
+                        </label>
                     </li>
-                    <li><input type="checkbox" name="location[]" value="ANML"> Category3</li>
-                    <li><input type="checkbox" name="location[]" value="Place"> Misc</li>
+                    <li>
+                        <label class="check-options">
+                            <input type="checkbox" name="location[]" value="Boise State University">
+                            Boise State University
+                        </label>
+                    </li>
+                    <li>
+                        <label class="check-options">
+                            <input type="checkbox" name="location[]" value="ANML">
+                            Category3
+                        </label>
+                    </li>
+                    <li>
+                        <label class="check-options">
+                            <input type="checkbox" name="location[]" value="Place">
+                            Misc
+                        </label>
+                    </li>
                 </ul>
-                <button type="button" class="btn btn-primary applyFilters" id="locationApplyFilters"
+                <button type="button" class="apply-filters-button mx-3 mt-2 py-1 px-4" id="locationApplyFilters"
                         style="display: none;">Apply
                 </button>
                 <br>
                 <hr>
                 {% if categories %}
-                    <label>Categories</label>
-                    <ul id="categoryList">
+                    <label class="filter-label mb-3 px-3">Categories</label>
+                    <ul id="categoryList" class="px-3">
                         {% for categoryId, categoryName in categories %}
-                            <li><input type="checkbox" name="category[]" value="{{ categoryId }}"> {{ categoryName }}
+                            <li>
+                                <label class="check-options">
+                                    <input type="checkbox" name="category[]" value="{{ categoryId }}">
+                                    {{ categoryName }}
+                                </label>
                             </li>
                         {% endfor %}
                     </ul>
-                    <button type="button" class="btn btn-primary applyFilters" id="categoryApplyFilters"
+                    <button type="button" class="apply-filters-button mx-3 mt-2 py-1 px-4" id="categoryApplyFilters"
                             style="display: none;">Apply
                     </button>
                 {% endif %}
-
             </div>
+
             <div class="col col-1"></div>
             <div id="dataTableContainer" class="col col-9">
                 {#                {% if show_controls %}#}
