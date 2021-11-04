@@ -11,10 +11,8 @@
 
 {% block content %}
     <div class="container">
+    <img class="background" src="{% static "pictures/2.png" %}">
         <div class="upload-container">
-            <div class="upload-text py-3">
-                <h3>Upload File</h3>
-            </div>
             {% if messages %}
                 {% for message in messages %}
                     <div class="{{ message.tags }}-message mb-3">
