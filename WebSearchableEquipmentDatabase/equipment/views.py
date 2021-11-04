@@ -73,9 +73,15 @@ def delete_file(path):
 
 
 def upload_csv(request):
-    error = False
     processed_file = False
     path = ''
+    last_line_parsed = ''
+    context = {
+        'upload_csv': True,
+        'user': request.user,
+        'show_controls': request.user.groups.all().filter(name="faculty").exists()
+    }
+
     if request.POST:
         category_map = {
             "A": Category.processing,
@@ -86,57 +92,60 @@ def upload_csv(request):
             "F": Category.thermal,
             "O": Category.other,
         }
-        file = request.FILES['file']
-        if not file:
+
+        try:
+            file = request.FILES['file']
+        except Exception:
             messages.error(request, "Please select a file to be uploaded.")
-            error = True
-        elif not str(file).lower().endswith('.csv'):
+            return render(request, 'equipment/uploadCSV.html', context)
+
+        if not str(file).lower().endswith('.csv'):
             messages.error(request, "File must be a .csv")
-            error = True
+            return render(request, 'equipment/uploadCSV.html', context)
 
-        if not error:
-            try:
-                path = save_file(file)
-                processed_file = True
-                with open(path) as f:
-                    reader = csv.reader(f)
-                    for row in reader:
-                        obj, created = Equipment.objects.get_or_create(
-                            name=row[0],
-                            model=row[1],
-                            manufacturer=row[2],
-                            year=row[3],
-                            pi=row[4],
-                            contact=row[5],
-                            location=row[7],
-                            description=row[8],
-                            url=row[10],
-                            permission=Equipment.guest,  # TODO: update accordingly
-                        )
+        try:
+            path = save_file(file)
+            processed_file = True
+            with open(path) as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    last_line_parsed = row
+                    obj, created = Equipment.objects.get_or_create(
+                        name=row[0],
+                        model=row[1],
+                        manufacturer=row[2],
+                        year=row[3],
+                        pi=row[4],
+                        contact=row[5],
+                        location=row[7],
+                        description=row[8],
+                        url=row[10],
+                        permission=Equipment.guest,  # TODO: update accordingly
+                    )
 
+                    if row[6] != '':
                         Center_Lab.objects.create(
                             center_lab_label=row[6],
                             equipment=obj
                         ),
 
-                        # This bit of code handles multiple categories for a piece of equipment
-                        sanitized = row[9].replace(" ", "").upper()
-                        split = sanitized.split(',')
-                        for val in split:
+                    # This bit of code handles multiple categories for a piece of equipment
+                    category_list = ['A', 'B', 'C', 'D', 'E', 'F', 'O']
+                    sanitized = row[9].replace(" ", "").upper()
+                    split = sanitized.split(',')
+                    for val in split:
+                        if val in category_list:
                             Category.objects.create(
                                 label=category_map[val],
                                 equipment=obj
                             )
 
-                    messages.success(request, "File uploaded successfully!")
-            except Exception:
-                error = True
+                messages.success(request, "File uploaded successfully!")
+        except Exception:
+            messages.error(request, "An error occurred trying to parse the following line: " + str(last_line_parsed))
 
-    if error:
-        messages.error(request, "There was an error processing your file.")
     if processed_file:
         delete_file(path)
-    context = {'upload_csv': True, 'user': request.user}
     return render(request, 'equipment/uploadCSV.html', context)
 
 
