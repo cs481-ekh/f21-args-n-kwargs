@@ -27,11 +27,6 @@ class EquipmentModelTest(TestCase):
         model_label = equip.model
         self.assertEqual(model_label, "Model 360")
 
-    def test_equipment_year(self):
-        equip = Equipment.objects.get(id=1)
-        year_label = equip.year
-        self.assertEqual(year_label, 2016)
-
     def test_equipment_pi(self):
         equip = Equipment.objects.get(id=1)
         pi_label = equip.pi
