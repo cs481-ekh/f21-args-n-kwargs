@@ -26,6 +26,23 @@
 
 .upload-button {
     flex: 1;
+    border: none;
+    background-color: rgb(198, 78, 36);
+    color: white;
+
+}
+
+.upload-button:hover {
+    background-color: rgb(173, 61, 27);
+    color: white;
+}
+
+.upload-button:disabled {
+    opacity: 0.7;
+}
+
+.upload-button:disabled:hover {
+    background-color: rgb(198, 78, 36);
 }
 
 .input-hint {

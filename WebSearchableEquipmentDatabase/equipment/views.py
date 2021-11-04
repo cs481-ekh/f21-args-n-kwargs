@@ -77,6 +77,7 @@ def upload_csv(request):
     processed_file = False
     path = ''
     last_line_parsed = ''
+    headers = False
     context = {
         'upload_csv': True,
         'user': request.user,
@@ -94,6 +95,9 @@ def upload_csv(request):
             "O": Category.other,
         }
 
+        if request.POST.get('headers'):
+            headers = True
+
         try:
             file = request.FILES['file']
         except Exception:
@@ -109,6 +113,8 @@ def upload_csv(request):
             processed_file = True
             with open(path) as f:
                 reader = csv.reader(f)
+                if headers:
+                    next(reader, None)
                 for row in reader:
                     last_line_parsed = row
                     obj, created = Equipment.objects.get_or_create(
