@@ -30,7 +30,19 @@ html, body {
     color: darkred;
     border: 2px solid red;
     border-radius: 5px;
+    list-style-type: none;
     text-align: center;
+    padding: 8px 0 8px 0;
+}
+
+.success-message {
+    background-color: #99edc3;
+    color: darkgreen;
+    border: 2px solid green;
+    border-radius: 5px;
+    list-style-type: none;
+    text-align: center;
+    padding: 8px 0 8px 0;
 }
 
 .forgot-password {

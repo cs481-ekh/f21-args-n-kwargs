@@ -38,7 +38,7 @@ def register(request):
             user.set_password(request.POST['password1'])
             user.is_active = False
             user.save()
-            email = form.cleaned_data.get('email')
+            user_email = form.cleaned_data.get('email')
             current_site = get_current_site(request)
             email_body = {
                 'user': user,
@@ -55,11 +55,14 @@ def register(request):
                 email_subject,
                 'Hello ' + user.email + ', Please the link below to activate your account \n' + activate_url,
                 'noreply@semycolon.com',
-                [email],
+                [user_email],
             )
             email.send(fail_silently=False)
-            messages.success(request, 'Account was created for ' + str(email))
-            return redirect('home')
+            messages.success(
+                request,
+                'An email was sent to ' + str(user_email) + ' with instructions on how to activate your account.'
+            )
+            return redirect('login')
 
     content = {'form': form}
     return render(request, 'accounts/register.html', content)

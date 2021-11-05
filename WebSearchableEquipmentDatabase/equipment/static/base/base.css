@@ -1,13 +1,15 @@
 html, body {
     height: 100%;
     margin: 0;
-    overflow: hidden;
 }
 
 .site-wrapper {
     height: 100%;
     margin: 0;
-    overflow: hidden;
+}
+
+.content-wrapper {
+    height: 88.6%;
 }
 
 /* Sets the background color of the navbar */

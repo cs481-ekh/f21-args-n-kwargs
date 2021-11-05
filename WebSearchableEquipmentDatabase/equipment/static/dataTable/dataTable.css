@@ -1,4 +1,4 @@
-.filterList{
+.filterList {
     list-style: none;
 }
 
@@ -32,3 +32,43 @@ label {
     background-color: rgb(173, 61, 27);
     color: white;
 }
+
+.control-button {
+    text-decoration: none;
+    color: gray;
+
+}
+
+.control-button:hover {
+    cursor: pointer;
+}
+
+.removeEquipmentButton:hover {
+    color: red;
+}
+
+.editEquipmentButton:hover {
+    color: rgb(198, 78, 36);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.save-button {
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(198, 78, 36);
+    color: white;
+
+}
+
+.save-button:hover {
+    background-color: rgb(173, 61, 27);
+    color: white;
+}
+
+

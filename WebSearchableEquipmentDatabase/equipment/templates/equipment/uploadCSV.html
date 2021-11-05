@@ -11,10 +11,8 @@
 
 {% block content %}
     <div class="container">
+    <img class="background" src="{% static "pictures/2.png" %}">
         <div class="upload-container">
-            <div class="upload-text py-3">
-                <h3>Upload File</h3>
-            </div>
             {% if messages %}
                 {% for message in messages %}
                     <div class="{{ message.tags }}-message mb-3">
@@ -34,11 +32,11 @@
                     </div>
                 </div>
                 <small class="input-hint">Accepted File Types: .csv only</small>
-                <div class="button-container">
-                    <button type="submit" class="btn btn-success upload-button mt-2" id="upload-button" disabled>
-                        Upload
-                    </button>
+                <div class="button-container mt-2">
+                    <button class="upload-button py-2" type="submit" id="upload-button" disabled>Upload</button>
                 </div>
+                <input class="header-checkbox" type="checkbox" name="headers" checked>
+                <small class="input-hint">File contains column names</small>
             </form>
         </div>
     </div>

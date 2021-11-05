@@ -52,7 +52,8 @@ def data_table(request):
                'show_controls': request.user.groups.all().filter(name="faculty").exists(),
                'data': equipmentObjects,
                'categories': Category.CATEGORY,
-               'form': EquipmentForm
+               'form': EquipmentForm,
+               'home': True,
                }
     return render(request, 'equipment/dataTable.html', context)
 
@@ -73,10 +74,13 @@ def delete_file(path):
     return
 
 
+@login_required
+@allowed_groups(allowed_groups=['faculty'])
 def upload_csv(request):
     processed_file = False
     path = ''
     last_line_parsed = ''
+    headers = False
     context = {
         'upload_csv': True,
         'user': request.user,
@@ -94,6 +98,9 @@ def upload_csv(request):
             "O": Category.other,
         }
 
+        if request.POST.get('headers'):
+            headers = True
+
         try:
             file = request.FILES['file']
         except Exception:
@@ -109,6 +116,8 @@ def upload_csv(request):
             processed_file = True
             with open(path) as f:
                 reader = csv.reader(f)
+                if headers:
+                    next(reader, None)
                 for row in reader:
                     last_line_parsed = row
                     obj, created = Equipment.objects.get_or_create(
