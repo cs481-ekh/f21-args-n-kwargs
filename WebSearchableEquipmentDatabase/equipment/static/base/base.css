@@ -48,6 +48,7 @@ html, body {
 /* Sets the color of the 'Equipment Database' text */
 .navbar-brand {
     color: white;
+    border-bottom: 2px solid rgb(12, 54, 154);
 }
 
 .navbar-brand:hover {
