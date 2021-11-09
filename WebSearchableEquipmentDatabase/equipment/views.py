@@ -22,9 +22,11 @@ def create_equipment(request):
         form = EquipmentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            data = {
+                'created': True
+            }
+            return JsonResponse(data)
     context = {'form': form}
-    # TODO: @michael update with actual template
     return render(request, 'equipment/equipmentForm.html', context)
 
 
@@ -52,6 +54,7 @@ def data_table(request):
                'show_controls': request.user.groups.all().filter(name="faculty").exists(),
                'data': equipmentObjects,
                'categories': Category.CATEGORY,
+               'locations': Center_Lab.LOCATION,
                'form': EquipmentForm,
                'home': True,
                }
@@ -67,6 +70,42 @@ def save_file(file):
             destination.write(chunk)
 
     return path
+
+
+@login_required
+@allowed_groups(allowed_groups=['faculty'])
+def get_item_by_id(request):
+    if request.POST:
+        obj = Equipment.objects.get(id=request.POST.get('id'))
+        obj.name = request.POST.get('name')
+        obj.model = request.POST.get('model')
+        obj.manufacturer = request.POST.get('manufacturer')
+        obj.year = request.POST.get('year')
+        obj.pi = request.POST.get('pi')
+        obj.location = request.POST.get('location')
+        obj.contact = request.POST.get('contact')
+        obj.description = request.POST.get('description')
+        obj.url = request.POST.get('url')
+        obj.permission = request.POST.get('permission')
+        obj.save()
+        data = {'updated': True}
+        return JsonResponse(data)
+    id1 = request.GET.get('id', None)
+    obj = Equipment.objects.get(id=id1)
+    data = {
+        'id': obj.id,
+        'name': obj.name,
+        'model': obj.model,
+        'manufacturer': obj.manufacturer,
+        'year': obj.year,
+        'pi': obj.pi,
+        'location': obj.location,
+        'contact': obj.contact,
+        'description': obj.description,
+        'url': obj.url,
+        'permission': obj.permission
+    }
+    return JsonResponse(data)
 
 
 def delete_file(path):
@@ -171,8 +210,8 @@ def testing(request):
 
 def delete_equipment(request):
     id1 = request.GET.get('id', None)
-    Equipment.objects.get(id=id1).delete()
+    numDeleted = Equipment.objects.get(id=id1).delete() #Delete returns the number of rows deleted, which should be 1 if the item exists
     data = {
-        'deleted': True
+        'deleted': numDeleted > 0, #This makes it so that the deleted flag is only set when something is actually deleted
     }
     return JsonResponse(data)
