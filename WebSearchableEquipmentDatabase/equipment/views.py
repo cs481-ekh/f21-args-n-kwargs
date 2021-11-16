@@ -212,6 +212,6 @@ def delete_equipment(request):
     id1 = request.GET.get('id', None)
     numDeleted = Equipment.objects.get(id=id1).delete() #Delete returns the number of rows deleted, which should be 1 if the item exists
     data = {
-        'deleted': numDeleted > 0, #This makes it so that the deleted flag is only set when something is actually deleted
+        'deleted': numDeleted, #This makes it so that the deleted flag is only set when something is actually deleted
     }
     return JsonResponse(data)
