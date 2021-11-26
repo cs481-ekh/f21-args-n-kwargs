@@ -88,10 +88,10 @@
                     {% for equipment in data %}
                         <tr data-id= {{ equipment.id }}>
                             <td>{{ equipment.name }}</td>
-                            <td>{{ equipment.model }}</td>
+                            <td>{{ equipment.description }}</td>
                             <td>{{ equipment.location }}</td>
-                            <td>{{ equipment.name }}</td>
-                            <td>{{ equipment.manfacturer }}</td>
+                            <td>{{ equipment.pi }}</td>
+                            <td>{% for cat in equipment.equipCat.all %}{{ cat.label }} {% endfor %}</td>
                             {#                                <td>{{ equipment.permission }}</td>#}
                             {#                                <td>{{ equipment.id}}</td>#}
                             {% if show_controls %}
@@ -230,11 +230,10 @@
                     });
 
             });
-            $('.applyFilters').click(function () {
+            $('.apply-filters-button').click(function () {
                 let locations = checkboxesToArray("location[]");
                 let categories = checkboxesToArray("category[]");
-                console.log(categories);
-                console.log(locations);
+                window.location = ('{% url 'filter_data' %}?locations[]='+locations+'&categories[]='+categories);
             });
 
             $('#locationList input').change(function () {
