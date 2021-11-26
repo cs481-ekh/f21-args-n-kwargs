@@ -37,20 +37,23 @@ def index(request):
 def filter_data(request):
     categories = request.GET.get('categories[]', '')
     locations = request.GET.get('locations[]', '')
-    data = Center_Lab.objects.all()
+    data = Equipment.objects.all()
     if locations and categories :#empty strings are falsy, so as long as they have data, go for it
-        data = Equipment.objects.all().filter(equipment_center_lab__center_lab_label__in=locations.split(',')).filter(category__in=categories.split(','))
+        data = data.filter(equipment_center_lab__center_lab_label__in=locations.split(',')).filter(equipCat__label__in=categories.split(','))
     elif categories and not locations:
-        data = Equipment.objects.all().filter(category__in=categories.split(','))
+        data = data.filter(equipCat__label__in=categories.split(','))
     elif locations and not categories:
-        data = Equipment.objects.all().filter(equipment_center_lab__center_lab_label__in=locations.split(','))
+        data = data.filter(equipment_center_lab__center_lab_label__in=locations.split(','))
     context = {'dataTable': True,
                'user': request.user,
                'show_controls': request.user.groups.all().filter(name="faculty").exists(),
                'categories': Category.CATEGORY,
                'locations': Center_Lab.LOCATION,
                'form': EquipmentForm,
-               'data': data
+               'data': data.distinct(),
+               'filter': True,
+               'filteredCategories': categories,
+               'filteredLocations': locations
                }
     return render(request, 'equipment/dataTable.html', context)
 
