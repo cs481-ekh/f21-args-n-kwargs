@@ -3,4 +3,6 @@ In an attempt to share university-owened equipment for making, processing, and c
 
 ## Project Description
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Describe what you actually built
+- How it works
+- Screenshots
