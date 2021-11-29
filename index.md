@@ -1,8 +1,4 @@
-<html>
-  <h1>
-    Web Searchable Equipment Database
-  </h1>
-  </html>
+
 ## Project Abstract 
 In an attempt to share university-owned equipment for making, processing, and characterizing materials with a wider community, many faculty member have been trying to establish and maintain a central repository to organize this information. Currently, a group attempts to catalog the information from various BSU departments so that it is organized for distribution. The information is then manually entered into a spreadsheet and shared other via a URL. This is a very time consuming and erroneous process of maintaining and disturbing this information. The proposal was to create a database with a web interface that can be used to manage and access the data.
 
