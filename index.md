@@ -1,37 +1,6 @@
-## Welcome to GitHub Pages
+## Project Abstract 
+In an attempt to share university-owened equipment for making, processing, and characterizing materials with a wider community, many faculty member have been trying to establish and maintain a central repository to organize this information. Currently, a group attempts to catalog the information from various BSU departments so that it is organgized for distrubtion. The information is then manually entered into a spreadsheet and shared other via a url. This is a very time consuming and erronous process of maintaining and distrubting this information. The proposal is to create a database with a web interface that can be used to manage and access the data. 
 
-You can use the [editor on GitHub](https://github.com/cs481-ekh/f21-args-n-kwargs/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
+## Project Description
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/cs481-ekh/f21-args-n-kwargs/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
