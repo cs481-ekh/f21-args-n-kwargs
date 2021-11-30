@@ -44,6 +44,11 @@ def filter_data(request):
         data = data.filter(equipCat__label__in=categories.split(','))
     elif locations and not categories:
         data = data.filter(equipment_center_lab__center_lab_label__in=locations.split(','))
+
+    if request.user.groups.all().filter(name="student"):
+        data = data.exclude(permission="faculty")
+    elif request.user.groups.all().filter(name="guest"):
+        data = data.filter(permission="guest")
     context = {'dataTable': True,
                'user': request.user,
                'show_controls': request.user.groups.all().filter(name="faculty").exists(),
@@ -87,10 +92,11 @@ def save_file(file):
     return path
 
 
-@login_required
-@allowed_groups(allowed_groups=['faculty'])
 def get_item_by_id(request):
     if request.POST:
+        group = request.user.groups.all()
+        if not group or not group[0].name == "faculty":
+            raise Exception("The action is not allowed for you")
         obj = Equipment.objects.get(id=request.POST.get('id'))
         obj.name = request.POST.get('name')
         obj.model = request.POST.get('model')

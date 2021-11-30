@@ -90,7 +90,7 @@
                     <tbody>
 
                     {% for equipment in data %}
-                        <tr data-id= {{ equipment.id }}>
+                        <tr data-id="{{ equipment.id }}" data-toggle="modal" data-target="#equipmentModal">
                             <td>{{ equipment.name }}</td>
                             <td>{{ equipment.description }}</td>
                             <td>{{ equipment.location }}</td>
@@ -117,7 +117,6 @@
             </div>
         </div>
     </div>
-    {% if show_controls %}
     <div class="modal fade" id="equipmentModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -130,11 +129,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    {% if show_controls %}
                     <button class="save-button py-2 px-3" type="button" id="saveEquipmentButton" data-dismiss="modal">Save</button>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+    {% if show_controls %}
     <div class="modal fade" id="deleteModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -187,6 +189,23 @@
                 $('#deleteItemId').val(id);
             });
             $(".editEquipmentButton").click(function () {
+                let id = $(this).attr('data-id');
+                //Get the item from the database
+                $.ajax({
+                    url: "{% url "crud_edit" %}",
+                    data: {"id": id},
+                    method: 'get',
+                    dataType: "json",
+                    success: function(data){
+                        for(const [key, value] of Object.entries(data)){
+                            //Populate the form with the values from the database
+                            $(`#id_${key}`).val(value);
+                        }
+                    }
+                });
+            });
+
+            $('#dataTable tr').click(function(){
                 let id = $(this).attr('data-id');
                 //Get the item from the database
                 $.ajax({
