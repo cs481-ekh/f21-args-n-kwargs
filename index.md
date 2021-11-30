@@ -7,6 +7,13 @@ We have built a web application that is hosted on BSU intranet that allows facul
 
 ## Project Description
 
-- Describe what you actually built
+For our Senior Capstone Project, we were tasked with creating a storage application for storing different pieces of equipment to replace our sponsor's current methodology for cataloging inventory: A large, shared Google Sheet. In this application, many pieces were built and then had to be integrated together to work seamlessly alongside each other.
+- A login system. This was key to allow multiple people to have different functionality. Only certain people should be able to add, edit, or remove pieces of equipment, so the decision was made to create different groups that had different sets of permissions.
+- A display system that can be used to search for specific pieces of equipment. We used JQuery DataTables since they came with search and sort functionality out of the box
+- An upload system for csv files to make the addition of new items fast and simple
+- Manual CRUD operations. A piece of equipment might break, or might be entered incorrectly, therefore it is required that the database should be able to be modified as needed. These functions are restricted to Faculty only.
+- Security. It has been a big topic in the news recently, and there are proprietary pieces of equipment that might not to be shown to just anyone, so in order to keep that constrained, security was a priority while developing the application.
+
+
 - How it works
 - Screenshots
