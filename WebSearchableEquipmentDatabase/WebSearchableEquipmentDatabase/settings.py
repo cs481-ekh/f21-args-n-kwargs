@@ -137,7 +137,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mseequipment@boisestate.edu'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'Stadaradim2021!@'
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
