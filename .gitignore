@@ -13,7 +13,7 @@ venv/
 ### Django ###
 WebSearchableEquipmentDatabase/*.log
 WebSearchableEquipmentDatabase/*.pot
-WebSearchableEquipmentDatabase/*.pyc
-WebSearchableEquipmentDatabase/__pycache__/
+*.pyc
+__pycache__
 WebSearchableEquipmentDatabase/static/
 WebSearchableEquipmentDatabase/media/
