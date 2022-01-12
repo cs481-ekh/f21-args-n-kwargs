@@ -82,7 +82,8 @@ def data_table(request):
 
 
 def save_file(file):
-    directory = 'fileUploads/'
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    directory = BASE_DIR + '/fileUploads/'
     file_name = uuid.uuid4()
     path = directory + str(file_name) + '.csv'
     with open(path, 'wb+') as destination:
@@ -174,6 +175,10 @@ def upload_csv(request):
         try:
             path = save_file(file)
             processed_file = True
+        except Exception as e:
+            messages.error(request, "An error occurred: " + str(e))
+
+        try:
             with open(path) as f:
                 reader = csv.reader(f)
                 if headers:
