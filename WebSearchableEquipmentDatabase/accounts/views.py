@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib.sites.shortcuts import get_current_site
@@ -53,15 +54,19 @@ def register(request):
 
             email = EmailMessage(
                 email_subject,
-                'Hello ' + user.email + ', Please the link below to activate your account \n' + activate_url,
+                'Thank you for registering with the BSU Shared Instrumentation Database\n' +
+                'Please use the link below to activate your account:\n\n' + activate_url,
                 'noreply@semycolon.com',
                 [user_email],
+                # bcc
+                [settings.EMAIL_HOST_USER]
             )
             email.send(fail_silently=False)
             messages.success(
                 request,
                 'An email was sent to ' + str(user_email) + ' with instructions on how to activate your account.'
             )
+            email.send(fail_silently=False)
             return redirect('login')
 
     content = {'form': form}
