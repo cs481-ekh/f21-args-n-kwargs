@@ -51,7 +51,7 @@ def filter_data(request):
         data = data.filter(permission="guest")
     context = {'dataTable': True,
                'user': request.user,
-               'show_controls': request.user.groups.all().filter(name="faculty").exists(),
+               'show_controls': request.user.groups.all().filter(name="faculty").exists() or request.user.is_superuser,
                'categories': Category.CATEGORY,
                'locations': Center_Lab.LOCATION,
                'form': EquipmentForm,
@@ -71,7 +71,7 @@ def data_table(request):
         equipmentObjects = equipmentObjects.filter(permission="guest")
     context = {'dataTable': True,
                'user': request.user,
-               'show_controls': request.user.groups.all().filter(name="faculty").exists(),
+               'show_controls': request.user.groups.all().filter(name="faculty").exists() or request.user.is_superuser,
                'data': equipmentObjects,
                'categories': Category.CATEGORY,
                'locations': Center_Lab.LOCATION,
