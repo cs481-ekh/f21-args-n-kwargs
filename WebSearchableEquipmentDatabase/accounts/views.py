@@ -66,7 +66,6 @@ def register(request):
                 request,
                 'An email was sent to ' + str(user_email) + ' with instructions on how to activate your account.'
             )
-            email.send(fail_silently=False)
             return redirect('login')
 
     content = {'form': form}
