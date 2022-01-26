@@ -1,0 +1,68 @@
+{% load static %}
+{% load bootstrap_icons %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} MS Equipment Database {% endblock %}</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0ae4a1cc09.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "base/base.css" %}">
+    {% block inlineCSS %}{% endblock %}
+    {% block jsLinks %}{% endblock %}
+</head>
+<body>
+{% block inlineJS %}{% endblock %}
+</body>
+</html>
+
+{% block cssLinks %}
+    <link rel="stylesheet" href="{% static "css/splash.css" %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div>
+            <div>
+                <img id="header" src="/static/pictures/logo-white.png">
+            </div>
+        <div class="subheading">
+            Micron School of Materials Science and Engineering
+        </div>
+        <div class="subheading">
+            Shared Instrumentation Database
+        </div>
+        </div>
+        <div id="buttons">
+            <div>
+            <div onclick="document.location='/equipment'">
+                {% bs_icon 'play-fill' extra_classes='button' color='black' %}
+            </div>
+                View
+            </div>
+            <div onclick="document.location= '/login'">
+            <div>
+                {% bs_icon 'person-fill' color='black' extra_classes='button' %}
+            </div>
+                Login
+            </div>
+            <div onclick="document.location= '/register'">
+            <div>
+                {% bs_icon 'person-plus-fill' color='black' extra_classes='button' %}
+            </div>
+                    Register
+                </div>
+
+        </div>
+        <div id="info">
+            The instruments listed in this database provide a large range of capabilities for synthesis, characterization,
+            and processing of materials of all types. Whether the instrumentation is managed through a federal recharge
+            center or an individual faculty lab, the resources of the School are available to advance your materials
+            research and development needs. Contact information is provided for each instrument, but if you don't find
+            what you need, please contact the School at <a href="mailto:mseequipment@boisestate.edu">mseequipment@boisestate.edu</a>.  Database registration provides
+            full access to the database for Boise State University students, faculty, and staff
+        </div>
+    </div>
+{% endblock %}
