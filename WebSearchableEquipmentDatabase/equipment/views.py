@@ -1,3 +1,5 @@
+import chardet
+import codecs
 import csv
 import os
 import uuid
@@ -178,8 +180,16 @@ def upload_csv(request):
         except Exception as e:
             messages.error(request, "An error occurred: " + str(e))
 
+        bytes = min(32, os.path.getsize(path))
+        raw = open(path, 'rb').read(bytes)
+
+        if raw.startswith(codecs.BOM_UTF8):
+            encoding = 'utf-8-sig'
+        else:
+            encoding = chardet.detect(raw)['encoding']
+
         try:
-            with open(path) as f:
+            with open(path, encoding=encoding) as f:
                 reader = csv.reader(f)
                 if headers:
                     next(reader, None)
@@ -216,8 +226,8 @@ def upload_csv(request):
                             )
 
                 messages.success(request, "File uploaded successfully!")
-        except Exception:
-            messages.error(request, "An error occurred trying to parse the following line: " + str(last_line_parsed))
+        except Exception as e:
+            messages.error(request, "An error occurred trying to parse the following line: " + str(last_line_parsed) + str(e))
 
     if processed_file:
         delete_file(path)
