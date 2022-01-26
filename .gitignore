@@ -16,3 +16,4 @@ WebSearchableEquipmentDatabase/*.pot
 *.pyc
 __pycache__
 WebSearchableEquipmentDatabase/media/
+WebSearchableEquipmentDatabase/static/
