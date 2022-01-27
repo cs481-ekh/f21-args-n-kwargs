@@ -29,6 +29,11 @@ html, body {
     text-align: center;
 }
 
+#mse a {
+    text-decoration: none;
+    color: white;
+}
+
 #view {
     background-image("/static/pictures/")
 }
