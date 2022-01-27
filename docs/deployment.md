@@ -21,7 +21,7 @@ production"
 - Create superuser account
   -       cd WebSearchableEquipmentDatabase
           python manage.py shell
-          shell> from accounts.model import Account
+          shell> from accounts.models import Account
           shell> Account.objects.create_superuser(email="myaccount@gmail.com", password="mypassword")
 - Start server
   -        python WebSearchableEquipmentDatabase/manage.py runserver
