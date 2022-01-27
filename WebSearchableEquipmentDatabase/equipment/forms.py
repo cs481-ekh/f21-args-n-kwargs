@@ -7,5 +7,5 @@ class EquipmentForm(ModelForm):
     """Equipment form that enables user to create a form with fields associated with equipment"""
     class Meta:
         model = Equipment
-        fields = ['name', 'model', 'manufacturer', 'year', 'pi', 'location', 'contact', 'description', 'url', 'location',
-                  'permission']
+        fields = ['name', 'model', 'manufacturer', 'year', 'permission', 'pi', 'center_lab', 'location', 'contact',
+                  'url', 'description', ]

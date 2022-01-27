@@ -27,7 +27,7 @@
                 <button type="button" class="apply-filters-button mt-2 py-1 px-4" id="clearFiltersButton">Clear Filters
                 </button>
             {% endif %}
-                <label class="filter-label mb-3 px-3">Locations</label>
+                <label class="filter-label mb-3 px-3">Center / Lab</label>
                 <ul id="locationList" class="px-3">
                     {% for locationId, locationName in locations %}
                     <li>
@@ -61,8 +61,7 @@
                 {% endif %}
             </div>
 
-            <div class="col col-1"></div>
-            <div id="dataTableContainer" class="col col-9">
+            <div id="dataTableContainer" class="col">
                 {#                {% if show_controls %}#}
                 {#                    {% csrf_token %}#}
                 {#                                <button class="btn btn-success" id="addEquipmentButton" data-toggle="modal" data-target="#equipmentModal" style="margin-bottom: 5px">Add Item#}
@@ -79,8 +78,9 @@
                         <!-- This will have to be populated at some point with real data, but for now this is just demo data-->
                         <th>Equipment Name</th>
                         <th>Description</th>
+                        <th>Center / Lab</th>
                         <th>Location</th>
-                        <th>Owner of Equipment</th>
+                        <th>Owner</th>
                         <th>Categories</th>
                         {% if show_controls %}
                             <th>Controls</th>
@@ -90,9 +90,10 @@
                     <tbody>
 
                     {% for equipment in data %}
-                        <tr data-id="{{ equipment.id }}" data-toggle="modal" data-target="#equipmentModal">
-                            <td>{{ equipment.name }}</td>
-                            <td>{{ equipment.description }}</td>
+                        <tr data-id="{{ equipment.id }}">
+                            <td data-toggle="modal" data-target="#detailsModal">{{ equipment.name }}</td>
+                            <td data-toggle="modal" data-target="#detailsModal">{{ equipment.description }}</td>
+                            <td>{{ equipment.center_lab }}</td>
                             <td>{{ equipment.location }}</td>
                             <td>{{ equipment.pi }}</td>
                             <td>{% for cat in equipment.equipCat.all %}{{ cat.label }} {% endfor %}</td>
@@ -132,6 +133,37 @@
                     {% if show_controls %}
                     <button class="save-button py-2 px-3" type="button" id="saveEquipmentButton" data-dismiss="modal">Save</button>
                     {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="detailsModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="details_name">Equipment Details</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="details">
+                        <div>
+                            <div>Model <span id="details_model"></span></div>
+                            <div id="details_manufacturer"></div>
+                            <div id="details_year"></div>
+                        </div>
+                        <div>
+                            <div id="details_center_lab"></div>
+                            <div id="details_location"></div>
+                        </div>
+                        <div>
+                            <div id="details_pi"></div>
+                            <div id="details_contact"></div>
+                            <a id="details_url" href="">Link</a>
+                        </div>
+                    </div>
+                    <div id="details_description"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -216,7 +248,8 @@
                     success: function(data){
                         for(const [key, value] of Object.entries(data)){
                             //Populate the form with the values from the database
-                            $(`#id_${key}`).val(value);
+                            if (key == 'url') $(`#details_${key}`).attr('href',value);
+                            else $(`#details_${key}`).html(value);
                         }
                     }
                 });
@@ -233,6 +266,7 @@
                     'manufacturer': $('#id_manufacturer').val(),
                     'year': $('#id_year').val(),
                     'pi': $('#id_pi').val(),
+                    'center_lab': $('#id_center_lab').val(),
                     'location': $('#id_location').val(),
                     'contact': $('#id_contact').val(),
                     'description': $('#id_description').val(),
@@ -260,7 +294,7 @@
             });
 
             $('#clearFiltersButton').click(function(){
-                window.location = '{% url 'home' %}';
+                window.location = '{% url 'equipment' %}';
             });
 
             $('#locationList input').change(function () {

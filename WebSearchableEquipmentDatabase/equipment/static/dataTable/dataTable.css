@@ -8,6 +8,22 @@ ul {
     margin: 0;
 }
 
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+}
+
+td:nth-child(1) {
+    max-width: 200px;
+    cursor: pointer;
+}
+td:nth-child(2) {
+    max-width: 300px;
+    cursor: pointer;
+}
+
 .filter-label {
     font-weight: bold;
 }
@@ -71,4 +87,15 @@ label {
     color: white;
 }
 
+.details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
 
+.details > div:nth-child(2) {
+    text-align: center;
+}
+.details > div:nth-child(3) {
+    text-align: right;
+}

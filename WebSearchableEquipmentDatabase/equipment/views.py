@@ -41,11 +41,11 @@ def filter_data(request):
     locations = request.GET.get('locations[]', '')
     data = Equipment.objects.all()
     if locations and categories :#empty strings are falsy, so as long as they have data, go for it
-        data = data.filter(equipment_center_lab__center_lab_label__in=locations.split(',')).filter(equipCat__label__in=categories.split(','))
+        data = data.filter(center_lab__in=locations.split(',')).filter(equipCat__label__in=categories.split(','))
     elif categories and not locations:
         data = data.filter(equipCat__label__in=categories.split(','))
     elif locations and not categories:
-        data = data.filter(equipment_center_lab__center_lab_label__in=locations.split(','))
+        data = data.filter(center_lab__in=locations.split(','))
 
     if request.user.groups.all().filter(name="student"):
         data = data.exclude(permission="faculty")
@@ -98,7 +98,7 @@ def save_file(file):
 def get_item_by_id(request):
     if request.POST:
         group = request.user.groups.all()
-        if not group or not group[0].name == "faculty":
+        if not request.user.is_superuser and (not group or not group[0].name == "faculty"):
             raise Exception("The action is not allowed for you")
         obj = Equipment.objects.get(id=request.POST.get('id'))
         obj.name = request.POST.get('name')
@@ -106,6 +106,7 @@ def get_item_by_id(request):
         obj.manufacturer = request.POST.get('manufacturer')
         obj.year = request.POST.get('year')
         obj.pi = request.POST.get('pi')
+        obj.center_lab = request.POST.get('center_lab')
         obj.location = request.POST.get('location')
         obj.contact = request.POST.get('contact')
         obj.description = request.POST.get('description')
@@ -123,6 +124,7 @@ def get_item_by_id(request):
         'manufacturer': obj.manufacturer,
         'year': obj.year,
         'pi': obj.pi,
+        'center_lab': obj.center_lab,
         'location': obj.location,
         'contact': obj.contact,
         'description': obj.description,
@@ -202,10 +204,11 @@ def upload_csv(request):
                         year=row[3],
                         pi=row[4],
                         contact=row[5],
+                        center_lab=row[6],
                         location=row[7],
                         description=row[8],
                         url=row[10],
-                        permission=Equipment.guest,  # TODO: update accordingly
+                        permission=row[11] # TODO: update accordingly
                     )
 
                     if row[6] != '':

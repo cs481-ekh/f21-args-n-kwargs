@@ -20,10 +20,11 @@ class Equipment(models.Model):
     manufacturer = models.CharField(max_length=255)
     year = models.CharField(max_length=255)
     pi = models.CharField(max_length=255)
-    contact = models.TextField(blank=True, null=True)
+    contact = models.CharField(max_length=255, blank=True, null=True)
+    center_lab = models.CharField(max_length=255, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    url = models.TextField(blank=True, null=True)
+    url = models.CharField(max_length=255, blank=True, null=True)
     permission = models.CharField(max_length=255, choices=Permission)
 
     def __str__(self):
