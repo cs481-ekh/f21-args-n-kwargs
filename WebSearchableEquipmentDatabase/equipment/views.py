@@ -67,10 +67,12 @@ def filter_data(request):
 
 def data_table(request):
     equipmentObjects = Equipment.objects.all()
-    if request.user.groups.all().filter(name="student"):
+    if request.user.is_superuser or request.user.groups.all().filter(name="faculty"):
+        pass
+    elif request.user.groups.all().filter(name="student"):
         equipmentObjects = equipmentObjects.exclude(permission="faculty")
-    elif request.user.groups.all().filter(name="guest"):
-        equipmentObjects = equipmentObjects.filter(permission="guest")
+    else:
+        equipmentObjects = equipmentObjects.exclude(permission="faculty").exclude(permission="student")
     context = {'dataTable': True,
                'user': request.user,
                'show_controls': request.user.groups.all().filter(name="faculty").exists() or request.user.is_superuser,
@@ -208,7 +210,7 @@ def upload_csv(request):
                         location=row[7],
                         description=row[8],
                         url=row[10],
-                        permission=row[11] # TODO: update accordingly
+                        permission=string.lower(row[11]) # TODO: update accordingly
                     )
 
                     if row[6] != '':

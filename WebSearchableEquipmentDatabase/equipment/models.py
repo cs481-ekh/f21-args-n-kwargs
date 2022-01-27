@@ -6,9 +6,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Equipment(models.Model):
     """Equipment Model with associated fields to describe a new piece of equipment"""
-    student = "Student"
-    faculty = "Faculty"
-    guest = "Guest"
+    student = "student"
+    faculty = "faculty"
+    guest = "guest"
 
     Permission = (
         (student, "Student"),
