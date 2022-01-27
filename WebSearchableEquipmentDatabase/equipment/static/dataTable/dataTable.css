@@ -1,6 +1,9 @@
 .filterList {
     list-style: none;
 }
+.row {
+    flex-wrap: nowrap;
+}
 
 ul {
     list-style-type: none;
