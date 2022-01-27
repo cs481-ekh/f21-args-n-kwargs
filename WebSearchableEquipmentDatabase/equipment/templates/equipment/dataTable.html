@@ -155,8 +155,8 @@
                             <div id="details_location"></div>
                         </div>
                         <div>
-                            <div id="details_pi"></div>
-                            <div id="details_contact"></div>
+                            <div><span id="details_pi"></span> (owner)</div>
+                            <div><span id="details_contact"></span> (contact)</div>
                             <a id="details_url" href="">Link</a>
                         </div>
                     </div>
@@ -192,7 +192,7 @@
 {% block inlineJS %}
     <script>
         $(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable( {"pageLength": 50});
             $("#deleteEquipmentButton").click(function () {
                 let id = +$("#deleteItemId").val();
                 $.ajax({
