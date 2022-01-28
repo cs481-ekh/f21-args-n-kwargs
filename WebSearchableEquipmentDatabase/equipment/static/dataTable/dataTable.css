@@ -102,3 +102,10 @@ label {
 .details > div:nth-child(3) {
     text-align: right;
 }
+
+#details_manufacturer {
+    font-style: italic;
+}
+#details_center_lab {
+    font-weight: bold;
+}

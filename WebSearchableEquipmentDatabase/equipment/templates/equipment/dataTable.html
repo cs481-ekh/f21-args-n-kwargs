@@ -91,8 +91,8 @@
 
                     {% for equipment in data %}
                         <tr data-id="{{ equipment.id }}">
-                            <td data-toggle="modal" data-target="#detailsModal">{{ equipment.name }}</td>
-                            <td data-toggle="modal" data-target="#detailsModal">{{ equipment.description }}</td>
+                            <td data-toggle="modal" data-target="#detailsModal" onclick="details({{ equipment.id }})">{{ equipment.name }}</td>
+                            <td data-toggle="modal" data-target="#detailsModal" onclick="details({{ equipment.id }})">{{ equipment.description }}</td>
                             <td>{{ equipment.center_lab }}</td>
                             <td>{{ equipment.location }}</td>
                             <td>{{ equipment.pi }}</td>
@@ -146,7 +146,7 @@
                 <div class="modal-body">
                     <div class="details">
                         <div>
-                            <div>Model <span id="details_model"></span></div>
+                            <div id="details_model"></div>
                             <div id="details_manufacturer"></div>
                             <div id="details_year"></div>
                         </div>
@@ -155,8 +155,8 @@
                             <div id="details_location"></div>
                         </div>
                         <div>
-                            <div><span id="details_pi"></span> (owner)</div>
-                            <div><span id="details_contact"></span> (contact)</div>
+                            <div id="details_pi"></div>
+                            <div id="details_contact"></div>
                             <a id="details_url" href="">Link</a>
                         </div>
                     </div>
@@ -237,23 +237,6 @@
                 });
             });
 
-            $('#dataTable tr').click(function(){
-                let id = $(this).attr('data-id');
-                //Get the item from the database
-                $.ajax({
-                    url: "{% url "crud_edit" %}",
-                    data: {"id": id},
-                    method: 'get',
-                    dataType: "json",
-                    success: function(data){
-                        for(const [key, value] of Object.entries(data)){
-                            //Populate the form with the values from the database
-                            if (key == 'url') $(`#details_${key}`).attr('href',value);
-                            else $(`#details_${key}`).html(value);
-                        }
-                    }
-                });
-            });
 
             //This is in the modal
             $("#saveEquipmentButton").click(function () {
@@ -328,7 +311,27 @@
             filteredCategories.trim().split(',').forEach((category) => {
                 $(`input[type=checkbox][value='${category}']`).prop('checked', true);
             });
-
         });
+
+        function details(id) {
+            //Get the item from the database
+            $.ajax({
+                url: "{% url "crud_edit" %}",
+                data: {"id": id},
+                method: 'get',
+                dataType: "json",
+                success: function(data){
+                    for(const [key, value] of Object.entries(data)){
+                        //Populate the form with the values from the database
+                        if (key == 'url') $(`#details_${key}`).attr('href',value);
+                        else if (key == 'model' && value) $(`#details_${key}`).html(`Model ${value}`);
+                        else if (key == 'pi' && value) $(`#details_${key}`).html(`${value} (owner)`);
+                        else if (key == 'contact' && value) $(`#details_${key}`).html(`${value} (contact)`);
+                        else $(`#details_${key}`).html(value);
+                    }
+                }
+            });
+        }
+
     </script>
 {% endblock %}
