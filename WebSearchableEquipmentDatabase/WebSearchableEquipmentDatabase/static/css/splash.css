@@ -29,6 +29,32 @@ html, body {
     text-align: center;
 }
 
+#sdp {
+    position: absolute;
+    margin: 10px;
+}
+#sdp img {
+    width: 100px;
+    cursor: pointer;
+}
+#sdp > div {
+    background-color: #0033A0;
+    color: white;
+    text-align: center;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 15px;
+    visibility: hidden;
+    position: relative;
+
+}
+
+#sdp a {
+    text-decoration: none;
+    color: #D64309;
+    font-weight: bold;
+}
+
 #mse a {
     text-decoration: none;
     color: white;

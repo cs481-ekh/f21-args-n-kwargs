@@ -10,19 +10,31 @@
     <script src="https://kit.fontawesome.com/0ae4a1cc09.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static "base/base.css" %}">
     {% block inlineCSS %}{% endblock %}
-    {% block jsLinks %}{% endblock %}
+    {% block jsLinks %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>#}
+    {% endblock %}
 </head>
 <body>
 {% block inlineJS %}{% endblock %}
 </body>
 </html>
-
 {% block cssLinks %}
     <link rel="stylesheet" href="{% static "css/splash.css" %}">
 {% endblock %}
 
 
 {% block content %}
+    <div id="sdp">
+        <img src="/static/pictures/bsu-sdp-button.png" onmouseover="$('#sdp_info').css('visibility', 'revert')">
+        <div id="sdp_info" onmouseleave="$('#sdp_info').css('visibility', 'collapse')">
+            This website was created for a BSU Computer Science Senior Design Project by
+            <div> Ian Whitney </div>
+            <div> Nick Stolarow </div>
+            <div> Michael Cleverdon </div>
+            For information about sponsoring a project click <a href="https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/">here</a>
+        </div>
+    </div>
     <div class="container">
         <div>
             <div>
