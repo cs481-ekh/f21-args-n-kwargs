@@ -34,8 +34,9 @@ html, body {
     margin: 10px;
 }
 #sdp img {
-    width: 100px;
+    width: 80px;
     cursor: pointer;
+    display: block;
 }
 #sdp > div {
     background-color: #0033A0;
