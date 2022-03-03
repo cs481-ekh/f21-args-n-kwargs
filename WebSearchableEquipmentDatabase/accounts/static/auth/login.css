@@ -46,14 +46,14 @@ html, body {
 }
 
 .forgot-password {
-    color: gray;
+    color: darkblue;
     text-decoration: none;
     font-size: 12px;
     font-weight: 500;
 }
 
 .forgot-password:link, .forgot-password:visited, .forgot-password:hover, .forgot-password:active {
-    color: gray
+    color: darkblue;
 }
 
 .forgot-password:hover {
@@ -79,14 +79,14 @@ html, body {
 }
 
 .create-account {
-    color: gray;
+    color: darkblue;
     text-decoration: none;
     font-size: 12px;
     font-weight: 500;
 }
 
 .create-account:link, .create-account:visited, .create-account:hover, .create-account:active {
-    color: gray
+    color: darkblue;
 }
 
 .create-account:hover {

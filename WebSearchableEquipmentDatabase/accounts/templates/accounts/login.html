@@ -23,12 +23,14 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">
+                    <label for="email-input">Email address</label>
                     <input type="email" name="username" class="form-control" id="email-input"
-                           placeholder="Email address">
+                           placeholder="">
                 </div>
                 <div class="form-group mb-0">
+                    <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" id="password-input"
-                           placeholder="Password">
+                           placeholder="">
                     <a href="{% url 'reset_password' %}" class="forgot-password mb-2">FORGOT?</a>
                 </div>
                 <div class="button-container mt-2">

@@ -103,6 +103,9 @@ label {
     text-align: right;
 }
 
+.details-link {
+    margin: auto;
+}
 #details_manufacturer {
     font-style: italic;
 }

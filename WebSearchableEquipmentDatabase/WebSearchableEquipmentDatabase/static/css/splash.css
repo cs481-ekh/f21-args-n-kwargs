@@ -4,6 +4,14 @@ html, body {
     background-position: center;
 }
 
+h2 {
+    font-size: medium;
+}
+
+h3 {
+    font-size: small;
+}
+
 .container {
     height: 100%;
     display: flex;

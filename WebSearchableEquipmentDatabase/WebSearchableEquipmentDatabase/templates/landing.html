@@ -25,8 +25,8 @@
 
 
 {% block content %}
-    <div id="sdp">
-            <img src="/static/pictures/bsu-sdp-button.png" onmouseover="$('#sdp_info').css('visibility', 'revert')">
+    <div id="sdp" tabindex="5">
+            <img src="/static/pictures/bsu-sdp-button.png" alt="senior design project logo" onmouseover="$('#sdp_info').css('visibility', 'revert')">
         <div id="sdp_info" onmouseleave="$('#sdp_info').css('visibility', 'collapse')">
             This website was created for a<br/>
             Boise State University<br/>
@@ -34,13 +34,14 @@
             <div> Ian Whitney </div>
             <div> Nick Stolarow </div>
             <div> Michael Cleverdon </div>
-            For information about sponsoring a project click <a href="https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/">here</a>
+            For information about sponsoring a project go to<br/>
+            <a href="https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/">https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/</a>
         </div>
     </div>
     <div class="container">
-        <div>
+        <h1 alt="page title">
             <div>
-                <a href="http://boisestate.edu"><img id="header" src="/static/pictures/logo-white.png"></a>
+                <a href="http://boisestate.edu" tabindex="4"><img id="header" alt="Boise State University logo" src="/static/pictures/logo-white.png"></a>
             </div>
         <div id="mse" class="subheading">
             <a href="http://boisestate.edu/coen-materials">Micron School of Materials Science and Engineering</a>
@@ -48,35 +49,35 @@
         <div class="subheading">
             Shared Instrumentation Database
         </div>
-        </div>
-        <div id="buttons">
+        </h1>
+        <h2 id="buttons" alt="navigation controls">
             <div>
-            <div onclick="document.location='/equipment'">
+            <div onclick="document.location='/equipment'" tabindex="1" accesskey="V">
                 {% bs_icon 'play-fill' extra_classes='button' color='black' %}
             </div>
                 View
             </div>
-            <div onclick="document.location= '/login'">
+            <div onclick="document.location= '/login'" tabindex="2" accesskey="L">
             <div>
                 {% bs_icon 'person-fill' color='black' extra_classes='button' %}
             </div>
                 Login
             </div>
-            <div onclick="document.location= '/register'">
+            <div onclick="document.location= '/register'" tabindex="3" accesskey="R">
             <div>
                 {% bs_icon 'person-plus-fill' color='black' extra_classes='button' %}
             </div>
                     Register
                 </div>
 
-        </div>
-        <div id="info">
+        </h2>
+        <h3 id="info">
             The instruments listed in this database provide a large range of capabilities for synthesis, characterization,
             and processing of materials of all types. Whether the instrumentation is managed through a federal recharge
             center or an individual faculty lab, the resources of the School are available to advance your materials
             research and development needs. Contact information is provided for each instrument, but if you don't find
             what you need, please contact the School at <a href="mailto:mseequipment@boisestate.edu">mseequipment@boisestate.edu</a>.  Database registration provides
             full access to the database for Boise State University students, faculty, and staff
-        </div>
+        </h3>
     </div>
 {% endblock %}

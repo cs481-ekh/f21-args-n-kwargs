@@ -17,6 +17,8 @@
 {% endblock %}
 
 {% block content %}
+    <h1 alt="equipment list">
+    </h1>
     <div class="container" style="margin: 5px 15px 5px 5px; max-width: 99%;">
         <div class="row">
             <div id="filterContainer" class="col col-2">
@@ -143,6 +145,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="details_name">Equipment Details</h5>
                 </div>
+                <div class="details-link"><a id="details_url" href="" tabindex="1" accesskey="L">Link</a></div>
                 <div class="modal-body">
                     <div class="details">
                         <div>
@@ -157,13 +160,12 @@
                         <div>
                             <div id="details_pi"></div>
                             <div id="details_contact"></div>
-                            <a id="details_url" href="">Link</a>
                         </div>
                     </div>
                     <div id="details_description"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" accesskey="C">Close</button>
                 </div>
             </div>
         </div>
@@ -323,7 +325,7 @@
                 success: function(data){
                     for(const [key, value] of Object.entries(data)){
                         //Populate the form with the values from the database
-                        if (key == 'url') $(`#details_${key}`).attr('href',value);
+                        if (key == 'url') { $(`#details_${key}`).attr('href',value); $(`#details_${key}`).html(value); }
                         else if (key == 'model' && value) $(`#details_${key}`).html(`Model ${value}`);
                         else if (key == 'pi' && value) $(`#details_${key}`).html(`${value} (owner)`);
                         else if (key == 'contact' && value) $(`#details_${key}`).html(`${value} (contact)`);

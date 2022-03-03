@@ -60,7 +60,7 @@ html, body {
 }
 
 .existing-account:link, .existing-account:visited, .existing-account:hover, .existing-account:active {
-    color: gray
+    color: darkblue;
 }
 
 .existing-account:hover {

@@ -6,17 +6,17 @@ from django.contrib.auth.forms import PasswordResetForm
 
 class AccountCreationForm(UserCreationForm):
     email = forms.CharField(
-        label="",
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email address'})
+        label="Email address",
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''})
     )
 
     password1 = forms.CharField(
-        label="", widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}),
+        label="Password", widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': ''}),
     )
 
     password2 = forms.CharField(
-        label="",
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm password'}),
+        label="Confirm password",
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': ''}),
     )
 
     """Account creation extends UserCreationForm to create a form based on the definition of our account model"""
