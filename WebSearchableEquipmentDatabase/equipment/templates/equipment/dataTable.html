@@ -330,7 +330,10 @@
                         else if (key == 'model' && value) $(`#details_${key}`).html(`Model ${value}`);
                         else if (key == 'pi' && value) $(`#details_${key}`).html(`${value} (owner)`);
                         else if (key == 'contact' && value) $(`#details_${key}`).html(`${value} (contact)`);
-                        else if (key == 'photo' && value) $(`#details_${key}`).html(`<img src="${value}">`);
+                        else if (key == 'photo') {
+                            if (value) $(`#details_${key}`).html(`<img src="${value}">`);
+                            else $(`#details_${key}`).html("");
+                        }
                         else $(`#details_${key}`).html(value);
                     }
                 }

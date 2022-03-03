@@ -132,7 +132,7 @@ def get_item_by_id(request):
         'description': obj.description,
         'url': obj.url,
         'permission': obj.permission,
-        'photo': obj.photo.url
+        'photo': obj.photo.url if obj.photo else None
     }
     return JsonResponse(data)
 
