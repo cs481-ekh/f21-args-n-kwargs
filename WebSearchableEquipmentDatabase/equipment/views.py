@@ -131,7 +131,8 @@ def get_item_by_id(request):
         'contact': obj.contact,
         'description': obj.description,
         'url': obj.url,
-        'permission': obj.permission
+        'permission': obj.permission,
+        'photo': obj.photo.url
     }
     return JsonResponse(data)
 

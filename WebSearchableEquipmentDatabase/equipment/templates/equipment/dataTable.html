@@ -163,6 +163,7 @@
                         </div>
                     </div>
                     <div id="details_description"></div>
+                    <div id="details_photo"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" accesskey="C">Close</button>
@@ -329,6 +330,7 @@
                         else if (key == 'model' && value) $(`#details_${key}`).html(`Model ${value}`);
                         else if (key == 'pi' && value) $(`#details_${key}`).html(`${value} (owner)`);
                         else if (key == 'contact' && value) $(`#details_${key}`).html(`${value} (contact)`);
+                        else if (key == 'photo' && value) $(`#details_${key}`).html(`<img src="${value}">`);
                         else $(`#details_${key}`).html(value);
                     }
                 }

@@ -8,4 +8,4 @@ class EquipmentForm(ModelForm):
     class Meta:
         model = Equipment
         fields = ['name', 'model', 'manufacturer', 'year', 'permission', 'pi', 'center_lab', 'location', 'contact',
-                  'url', 'description', ]
+                  'url', 'description', 'photo']

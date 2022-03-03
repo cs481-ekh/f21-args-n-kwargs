@@ -26,6 +26,7 @@ class Equipment(models.Model):
     description = models.TextField(blank=True, null=True)
     url = models.CharField(max_length=255, blank=True, null=True)
     permission = models.CharField(max_length=255, choices=Permission)
+    photo = models.ImageField(blank=True, null=True, upload_to="images")
 
     def __str__(self):
         return f'{self.name}, {self.model}'
