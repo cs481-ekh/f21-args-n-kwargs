@@ -211,7 +211,7 @@ def upload_csv(request):
                         location=row[7],
                         description=row[8],
                         url=row[10],
-                        permission=string.lower(row[11]) # TODO: update accordingly
+                        permission=row[11].lower(),
                     )
 
                     if row[6] != '':
