@@ -79,7 +79,7 @@
                     <tr>
                         <!-- This will have to be populated at some point with real data, but for now this is just demo data-->
                         <th>Equipment Name</th>
-                        <th>Description</th>
+                        <th>Model</th>
                         <th>Center / Lab</th>
                         <th>Location</th>
                         <th>Owner</th>
@@ -94,7 +94,7 @@
                     {% for equipment in data %}
                         <tr data-id="{{ equipment.id }}">
                             <td data-toggle="modal" data-target="#detailsModal" onclick="details({{ equipment.id }})">{{ equipment.name }}</td>
-                            <td data-toggle="modal" data-target="#detailsModal" onclick="details({{ equipment.id }})">{{ equipment.description }}</td>
+                            <td data-toggle="modal" data-target="#detailsModal" onclick="details({{ equipment.id }})">{{ equipment.model }}</td>
                             <td>{{ equipment.center_lab }}</td>
                             <td>{{ equipment.location }}</td>
                             <td>{{ equipment.pi }}</td>
