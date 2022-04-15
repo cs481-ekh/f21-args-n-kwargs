@@ -66,7 +66,7 @@ class Center_Lab(models.Model):
         ("SSL"     , "Surface Science Lab"),
         ("MACS"    , "Materials and Characterization Suite"),
         ("AMLCAES" , "Advanced Materials Lab (CAES)"),
-        ("AMLMSME" , "Advanced Materials Lab (MSME)"),
+        ("AMLMSMSE" , "Advanced Materials Lab (MSME)"),
         ("MTL"     , "Materials Teaching Lab"),
         ("IML"     , "Idaho Microfabrication Lab"),
         ("FCL"     , "Functional Ceramics Lab"),
