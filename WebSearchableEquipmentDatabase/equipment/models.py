@@ -62,17 +62,19 @@ class Category(models.Model):
 class Center_Lab(models.Model):
     """Center_Lab that allow improved searches of the equipment based on location of equipment"""
     LOCATION = (
-        ("BSCMC", "BSCMC"),
-        ("SSL", "SSL"),
-        ("MaCS", "MaCS"),
-        ("AML (CAES)", "AML (CAES)"),
-        ("AML (MSMSE)", "AML (MSMSE)"),
-        ("Materials Teaching Lab", "Materials Teaching Lab"),
-        ("Keck", "Keck"),
-        ("Other MSE Labs", "Other MSE Labs"),
-        ("Phys-Chem-Biol-Other", "Phys-Chem-Biol-Other"),
-        ("IML", "IML"),
-
+        ("BSCMC"   , "Boise State Center for Materials Characterization"),
+        ("SSL"     , "Surface Science Lab"),
+        ("MACS"    , "Materials and Characterization Suite"),
+        ("AMLCAES" , "Advanced Materials Lab (CAES)"),
+        ("AMLMSME" , "Advanced Materials Lab (MSME)"),
+        ("MTL"     , "Materials Teaching Lab"),
+        ("IML"     , "Idaho Microfabrication Lab"),
+        ("FCL"     , "Functional Ceramics Lab"),
+        ("BSCSM"   , "Boise State Center for Soft Materials"),
+        ("AFL"     , "Atomic Films Lab"),
+        ("KECK"    , "Keck"),
+        ("OTHERMSE", "Other MSE Labs"),
+        ("OTHER"   , "Other Labs"),
     )
     center_lab_label = models.CharField(max_length=200, null=True, choices=LOCATION)
     equipment = models.ForeignKey(Equipment, related_name="equipment_center_lab", on_delete=models.CASCADE)

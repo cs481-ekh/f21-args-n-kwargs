@@ -95,7 +95,13 @@
                         <tr data-id="{{ equipment.id }}">
                             <td data-toggle="modal" data-target="#detailsModal" onclick="details({{ equipment.id }})">{{ equipment.name }}</td>
                             <td data-toggle="modal" data-target="#detailsModal" onclick="details({{ equipment.id }})">{{ equipment.model }}</td>
-                            <td>{{ equipment.center_lab }}</td>
+                            <td>
+                                {% for locationId, locationName in locations %}
+                                    {% if locationId == equipment.center_lab %}
+                                        {{ locationName }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
                             <td>{{ equipment.location }}</td>
                             <td>{{ equipment.pi }}</td>
                             <td>{% for cat in equipment.equipCat.all %}{{ cat.label }} {% endfor %}</td>
