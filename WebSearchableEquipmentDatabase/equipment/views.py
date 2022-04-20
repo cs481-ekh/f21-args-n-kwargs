@@ -47,10 +47,15 @@ def filter_data(request):
     elif locations and not categories:
         data = data.filter(center_lab__in=locations.split(','))
 
+    if request.user.is_superuser or request.user.groups.all().filter(name="faculty"):
+        pass
     if request.user.groups.all().filter(name="student"):
         data = data.exclude(permission="faculty")
-    elif request.user.groups.all().filter(name="guest"):
+    else:
+        # Just to be sure
+        data = data.exclude(permission="faculty").exclude(permission="student")
         data = data.filter(permission="guest")
+
     context = {'dataTable': True,
                'user': request.user,
                'show_controls': request.user.groups.all().filter(name="faculty").exists() or request.user.is_superuser,
