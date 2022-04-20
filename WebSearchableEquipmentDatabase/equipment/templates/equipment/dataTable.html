@@ -109,10 +109,12 @@
                             {#                                <td>{{ equipment.id}}</td>#}
                             {% if show_controls %}
                                 <td class="controls">
-                                    <a class="editEquipmentButton control-button px-2" data-toggle="modal" data-target="#equipmentModal" data-id="{{ equipment.id }}">
+                                    <a class="editEquipmentButton control-button px-2" data-toggle="modal" data-target="#equipmentModal" data-id="{{ equipment.id }}"
+                                       onclick="onEdit({{ equipment.id }})">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    <a class="removeEquipmentButton control-button px-2" data-id="{{ equipment.id }}" data-name="{{ equipment.name }}" data-target="#deleteModal" data-toggle="modal">
+                                    <a class="removeEquipmentButton control-button px-2" data-id="{{ equipment.id }}" data-name="{{ equipment.name }}" data-target="#deleteModal" data-toggle="modal"
+                                       onclick="onRemove({{ equipment.id }}, {{ equipment.name }})">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
 
@@ -221,31 +223,6 @@
                 $('#equipmentModal').find('textarea').val('');
                 $('#equipmentModal').find('select').val('');
             });
-            $('.removeEquipmentButton').click(function(){
-                let row = $(this);
-                let name = row.attr('data-name');
-                let id = row.attr('data-id');
-                console.log(row);
-                $('#deleteItemName').text(name);
-                $('#deleteItemId').val(id);
-            });
-            $(".editEquipmentButton").click(function () {
-                let id = $(this).attr('data-id');
-                //Get the item from the database
-                $.ajax({
-                    url: "{% url "crud_edit" %}",
-                    data: {"id": id},
-                    method: 'get',
-                    dataType: "json",
-                    success: function(data){
-                        for(const [key, value] of Object.entries(data)){
-                            //Populate the form with the values from the database
-                            $(`#id_${key}`).val(value);
-                        }
-                    }
-                });
-            });
-
 
             //This is in the modal
             $("#saveEquipmentButton").click(function () {
@@ -322,6 +299,27 @@
             });
         });
 
+        function onEdit(id) {
+            //Get the item from the database
+            $.ajax({
+                url: "{% url "crud_edit" %}",
+                data: {"id": id},
+                method: 'get',
+                dataType: "json",
+                success: function(data){
+                    for(const [key, value] of Object.entries(data)){
+                        //Populate the form with the values from the database
+                        $(`#id_${key}`).val(value);
+                    }
+                }
+            });
+        }
+
+        function onRemove(id, name) {
+            console.log(name);
+            $('#deleteItemName').text(name);
+            $('#deleteItemId').val(id);
+        }
         function details(id) {
             //Get the item from the database
             $.ajax({
