@@ -49,7 +49,7 @@ def filter_data(request):
 
     if request.user.is_superuser or request.user.groups.all().filter(name="faculty"):
         pass
-    if request.user.groups.all().filter(name="student"):
+    elif request.user.groups.all().filter(name="student"):
         data = data.exclude(permission="faculty")
     else:
         # Just to be sure
