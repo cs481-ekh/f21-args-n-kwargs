@@ -109,14 +109,14 @@
                             {#                                <td>{{ equipment.id}}</td>#}
                             {% if show_controls %}
                                 <td class="controls">
-                                    <a class="editEquipmentButton control-button px-2" data-toggle="modal" data-target="#equipmentModal" data-id="{{ equipment.pk }}">
+                                    <a class="editEquipmentButton control-button px-2" data-toggle="modal" data-target="#equipmentModal" data-id="{{ equipment.id }}">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    <a class="removeEquipmentButton control-button px-2" data-id="{{ equipment.pk }}" data-name="{{ equipment.name }}" data-target="#deleteModal" data-toggle="modal">
+                                    <a class="removeEquipmentButton control-button px-2" data-id="{{ equipment.id }}" data-name="{{ equipment.name }}" data-target="#deleteModal" data-toggle="modal">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
 
-                                    {#                               <button class="btn btn-danger form-control" onClick="deleteUser({{equipment.pk}})">DELETE</button>#}
+                                    {#                               <button class="btn btn-danger form-control" onClick="deleteUser({{equipment.id}})">DELETE</button>#}
                                 </td>
                             {% endif %}
                         </tr>
