@@ -13,7 +13,7 @@ from django.core.wsgi import get_wsgi_application
 
 sys.path.append('/opt/mswebapp/WebSearchableEquipmentDatabase')
 
-sys.path.append('/opt/anaconda3/envs/projectvenv/lib/python3.8/site-packages')
+sys.path.append('/opt/anaconda3/envs/mswebapp/lib/python3.8/site-packages')
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WebSearchableEquipmentDatabase.settings')
