@@ -54,7 +54,6 @@ def filter_data(request):
     else:
         # Just to be sure
         data = data.exclude(permission="faculty").exclude(permission="student")
-        data = data.filter(permission="guest")
 
     context = {'dataTable': True,
                'user': request.user,
