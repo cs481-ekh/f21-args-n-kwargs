@@ -1,0 +1,17 @@
+asgiref
+chardet
+crispy-bootstrap4
+dj-database-url
+Django>=4.2
+django-crispy-forms
+django-bootstrap-icons
+dnspython
+docutils
+filelock
+idna
+Pillow
+python-decouple
+pytz
+six
+soupsieve
+sqlparse

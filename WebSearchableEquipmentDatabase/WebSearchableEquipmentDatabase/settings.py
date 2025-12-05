@@ -34,6 +34,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 INSTALLED_APPS = [
     'crispy_forms',
+    'crispy_bootstrap4',
     'django_bootstrap_icons',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -144,6 +145,7 @@ EMAIL_HOST_USER = 'mseequipment@boisestate.edu'
 EMAIL_HOST_PASSWORD = ''
 
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DJANGO_ICONS = {
