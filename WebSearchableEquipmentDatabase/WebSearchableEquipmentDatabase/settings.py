@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
+
+HTML_ROOT = config('HTML_ROOT', default='demo')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +28,7 @@ SECRET_KEY = '15wm^8_n1rr-a2-&*yx2bgsqfq5n@$9%m&$7m(i6$q^0tu1soj'  # TODO: gener
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False  # TODO: change to false once in production
 
-ALLOWED_HOSTS = ['mswebdb.boisestate.edu', '127.0.0.1', '132.178.215.41', 'localhost']   # TODO: will need to be the url our website is hosted at once in production
+ALLOWED_HOSTS = ['mswebdb.boisestate.edu', 'srpro-lxc-01.boisestate.edu', '127.0.0.1', '132.178.215.41', 'localhost']   # TODO: will need to be the url our website is hosted at once in production
 
 # Application definition
 
@@ -125,12 +128,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+STATIC_URL = f'{HTML_ROOT}/static/'
+MEDIA_URL = f'{HTML_ROOT}/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # STATIC_ROOT is used in deployment using the manage.py collectstatic command
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -142,7 +145,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mseequipment@boisestate.edu'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'Blueandorange1!'
 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'

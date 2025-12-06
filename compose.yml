@@ -1,0 +1,9 @@
+services:
+   mswebdb:
+    image: mswebdb
+    ports: "${HOST_PORT:-8025}:8000"
+    volumes:
+      - ./config.env:/app/WebSearchableEquipmentDatabase/.env
+      - ./db/db.sqlite3:/app/db.sqlite3
+      - ./media:/app/media
+    

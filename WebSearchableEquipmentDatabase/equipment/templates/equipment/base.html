@@ -52,9 +52,9 @@
                 </div>
                 <div class="nav-item">
                     {% if user.is_authenticated %}
-                        <a class="login-logout" style="text-align: right;" href="/logout">Log out</a>
+                        <a class="login-logout" style="text-align: right;" href="{% url 'logout' %}">Log out</a>
                     {% else %}
-                        <a class="login-logout" style="text-align: right;" href="/login">Log in</a>
+                        <a class="login-logout" style="text-align: right;" href="{% url 'login' %}">Log in</a>
                     {% endif %}
                 </div>
             </div>
