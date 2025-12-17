@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 from decouple import config
 
-HTML_ROOT = config('HTML_ROOT', default='demo')
+HTML_ROOT = config('HTML_ROOT', default='')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -128,8 +128,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = f'{HTML_ROOT}/static/'
-MEDIA_URL = f'{HTML_ROOT}/media/'
+STATIC_URL = f'{HTML_ROOT + '/' if HTML_ROOT else ''}static/'
+MEDIA_URL = f'{HTML_ROOT + '/' if HTML_ROOT else ''}media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # STATIC_ROOT is used in deployment using the manage.py collectstatic command
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

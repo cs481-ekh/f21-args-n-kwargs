@@ -51,5 +51,5 @@ if not settings.DEBUG:
 
 
 urlpatterns = [
-    path(f'{settings.HTML_ROOT}/', include(site_patterns)) # changes site root based on global variable in settings.py
+    path(f'{settings.HTML_ROOT}', include(site_patterns)) # changes site root based on global variable in settings.py
 ]
